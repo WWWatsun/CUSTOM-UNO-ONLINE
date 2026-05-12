@@ -15,7 +15,7 @@ namespace PlayerScripts
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            
+
         }
 
         // Update is called once per frame
@@ -26,7 +26,7 @@ namespace PlayerScripts
 
         public override void OnNetworkSpawn()
         {
-            TurnManager.Instance.OnNextPlayerTurn += SetPlayerTurn;
+
         }
 
         public int GetPlayerID()
@@ -34,18 +34,24 @@ namespace PlayerScripts
             return playerID;
         }
 
-        private void SetPlayerTurn(int playerID)
+        //public void SetPlayerTurn(int playerID)
+        //{
+        //    if (playerID == this.playerID)
+        //    {
+        //        playerVisual.SetPlayerTurnVisual(true);
+        //        playerController.SetPlayerTurnControls(true);
+        //    }
+        //    else
+        //    {
+        //        playerVisual.SetPlayerTurnVisual(false);
+        //        playerController.SetPlayerTurnControls(false);
+        //    }
+        //}
+
+        public void SetPlayerTurn(bool isCurrentTurn)
         {
-            if (playerID == this.playerID)
-            {
-                playerVisual.SetPlayerTurnVisual(true);
-                playerController.SetPlayerTurnControls(true);
-            }
-            else
-            {
-                playerVisual.SetPlayerTurnVisual(false);
-                playerController.SetPlayerTurnControls(false);
-            }
+            playerVisual.SetPlayerTurnVisual(isCurrentTurn);
+            //playerController.SetPlayerTurnControls(isCurrentTurn);
         }
     }
 }
