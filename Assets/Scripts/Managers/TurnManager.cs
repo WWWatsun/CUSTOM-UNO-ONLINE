@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
+using Unity.Netcode;
 
 namespace Managers
 {
-    public class TurnManager : MonoBehaviour
+    public class TurnManager : NetworkBehaviour
     {
         public static TurnManager Instance { get; private set; }
         public Action<int> OnNextPlayerTurn;
@@ -40,6 +41,7 @@ namespace Managers
         {
             playerCount = PlayersManager.Instance.GetPlayerCount();
             currentPlayerIndex = 0;
+            OnNextPlayerTurn?.Invoke(currentPlayerIndex);
             Debug.Log("Current Player Index: " + currentPlayerIndex);
         }
 

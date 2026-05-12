@@ -1,4 +1,5 @@
 using Unity.Cinemachine;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
@@ -6,7 +7,7 @@ using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 namespace PlayerScripts
 {
     [RequireComponent(typeof(PlayerInput))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : NetworkBehaviour
     {
         [Header("Look Settings")]
         [SerializeField] private CinemachineCamera playerCamera;
@@ -19,16 +20,33 @@ namespace PlayerScripts
         private float verticalRotation = 0f;
         private bool isPlaying = true; // Flag to track if the game has started
 
+        private void Awake()
+        {
+            playerInput = GetComponent<PlayerInput>();
+            playerInput.enabled = false;
+        }
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            playerInput = GetComponent<PlayerInput>();
+            
         }
 
         // Update is called once per frame
         void Update()
         {
             HandleLook();
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            if (IsOwner)
+            {
+                playerInput.enabled = true; // Enable input for the owning player
+                playerCamera.Priority = 20; // Set camera priority to ensure the owning player's camera is active
+            }
+
+            base.OnNetworkSpawn();
         }
 
         public void OnLook(InputValue context)
@@ -52,7 +70,7 @@ namespace PlayerScripts
         public void SetPlayerTurnControls(bool isCurrentTurn)
         {
             isPlaying = isCurrentTurn; // Update the flag based on whether it's the player's turn
-            playerCamera.Priority = isCurrentTurn ? 20 : 10; // Set camera priority to switch between players
+            //playerCamera.Priority = isCurrentTurn ? 20 : 10; // Set camera priority to switch between players
         }
     }
 }

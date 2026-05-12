@@ -1,10 +1,11 @@
 using UnityEngine;
+using Unity.Netcode;
 using Managers;
 using System;
 
 namespace PlayerScripts
 {
-    public class Player : MonoBehaviour
+    public class Player : NetworkBehaviour
     {
         public int playerID;  // playerID = -1 -> auto assign, playerID >= 0 -> 3 assigned by GameManager
 
@@ -14,8 +15,7 @@ namespace PlayerScripts
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            PlayersManager.Instance.JoinPlayer(this, playerID);
-            TurnManager.Instance.OnNextPlayerTurn += SetPlayerTurn;
+            
         }
 
         // Update is called once per frame
@@ -24,9 +24,9 @@ namespace PlayerScripts
 
         }
 
-        private void OnEnable()
+        public override void OnNetworkSpawn()
         {
-            
+            TurnManager.Instance.OnNextPlayerTurn += SetPlayerTurn;
         }
 
         public int GetPlayerID()
