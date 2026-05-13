@@ -26,6 +26,12 @@ namespace Managers
             }
 
             activeDeck.AddRange(cardDeck);
+
+            for (int i = 0; i < activeDeck.Count; i++)
+            {
+                cardDeck[i].cardID = i;
+            }
+
             Shuffle();
         }
 
@@ -37,7 +43,7 @@ namespace Managers
             //Iterate from last card, switch with random card
             while (n > 0)
             {
-                int k = Random.Range(0, n);
+                int k = UnityEngine.Random.Range(0, n);
                 CardScriptables card = activeDeck[k];
                 activeDeck[k] = activeDeck[n];
                 activeDeck[n] = card;
@@ -68,6 +74,16 @@ namespace Managers
         public void GetDiscarded(CardScriptables card)
         {
             discardPile.Add(card);
+        }
+
+        public CardScriptables GetCardData(int cardID)
+        {
+            if (cardID < 0 || cardID >= cardDeck.Length)
+            {
+                Debug.LogError($"Invalid card ID: {cardID}");
+                return null;
+            }
+            return cardDeck[cardID];
         }
     }
 }

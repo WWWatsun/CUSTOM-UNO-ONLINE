@@ -21,13 +21,14 @@ namespace PlayerScripts
             CardScriptables card = DeckManager.Instance.DrawCard();
             handList.Add(card);
 
-            GameObject cardObject = Instantiate(cardPrefab, transform.position - Vector3.up, transform.rotation);
-            cardObject.GetComponent<Card>().SetCard(card);
+            GameObject cardObject = Instantiate(cardPrefab, transform.position, transform.rotation);
             cardObjects.Add(cardObject);
 
             NetworkObject cardNetworkObject = cardObject.GetComponent<NetworkObject>();
             cardNetworkObject.Spawn();
             cardNetworkObject.TrySetParent(transform);
+
+            cardObject.GetComponent<Card>().SetCard(card.cardID);
 
             UpdateHandLayout();
 
