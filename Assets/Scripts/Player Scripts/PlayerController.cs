@@ -1,3 +1,4 @@
+using Managers;
 using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
@@ -64,7 +65,7 @@ namespace PlayerScripts
             verticalRotation = Mathf.Clamp(verticalRotation, -maxLookAngle, maxLookAngle);
 
             playerCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
-            transform.Rotate(Vector3.up * mouseX);
+            PlayersManager.Instance.UpdatePlayerLookInputRpc(NetworkManager.Singleton.LocalClientId, mouseX);
         }
 
         public void SetPlayerTurnControls(bool isCurrentTurn)

@@ -5,17 +5,18 @@ using System;
 
 namespace PlayerScripts
 {
+    [RequireComponent(typeof(PlayerController))]
     public class Player : NetworkBehaviour
     {
         public int playerID;  // playerID = -1 -> auto assign, playerID >= 0 -> 3 assigned by GameManager
 
-        [SerializeField] private PlayerController playerController;
         [SerializeField] private PlayerVisual playerVisual;
+        private PlayerController playerController;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-
+            playerController = GetComponent<PlayerController>();
         }
 
         // Update is called once per frame
@@ -33,20 +34,6 @@ namespace PlayerScripts
         {
             return playerID;
         }
-
-        //public void SetPlayerTurn(int playerID)
-        //{
-        //    if (playerID == this.playerID)
-        //    {
-        //        playerVisual.SetPlayerTurnVisual(true);
-        //        playerController.SetPlayerTurnControls(true);
-        //    }
-        //    else
-        //    {
-        //        playerVisual.SetPlayerTurnVisual(false);
-        //        playerController.SetPlayerTurnControls(false);
-        //    }
-        //}
 
         public void SetPlayerTurn(bool isCurrentTurn)
         {

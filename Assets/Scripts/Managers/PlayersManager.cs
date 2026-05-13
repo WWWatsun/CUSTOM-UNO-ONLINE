@@ -13,10 +13,18 @@ namespace Managers
     {
         public static PlayersManager Instance { get; private set; }
 
+        [Header("Player Spawn Points")]
         [SerializeField] Transform player1SpawnPoint;
         [SerializeField] Transform player2SpawnPoint;
         [SerializeField] Transform player3SpawnPoint;
         [SerializeField] Transform player4SpawnPoint;
+
+        [Header("Player Hand Spawn Points")]
+        [SerializeField] PlayerHand player1Hand;
+        [SerializeField] PlayerHand player2Hand;
+        [SerializeField] PlayerHand player3Hand;
+        [SerializeField] PlayerHand player4Hand;
+
         List<Player> m_Players;
         int m_PlayersCount;
 
@@ -36,17 +44,14 @@ namespace Managers
             }
         }
 
-        public int GetPlayerCount()
-        {
-            return m_PlayersCount;
-        }
-
         public override void OnNetworkSpawn()
         {
             if (IsServer)
             {
                 // Subscribe to the OnClientConnectedCallback event to handle player joining
                 NetworkManager.Singleton.OnClientConnectedCallback += HandlePlayerJoined;
+
+                GameManager.Instance.OnStartGame += DealCardAtStart;
 
                 //Create 4 empty player objects in the list
                 m_Players = new List<Player>() { null, null, null, null };
@@ -66,41 +71,57 @@ namespace Managers
 
         private void HandlePlayerJoined(ulong clientId)
         {
-            m_Players[m_PlayersCount] = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<Player>();
+            if (m_PlayersCount >= 4) return;
 
-            // Set player position to the corresponding spawn point
+            m_Players[m_PlayersCount] = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<Player>();
             Player player = m_Players[m_PlayersCount];
             Transform newTransform = GetPlayerSpawnPoint(m_PlayersCount);
+
             if (IsServer && player != null)
             {
-                // Create parameters to target ONLY the client that just joined
-                ClientRpcParams clientRpcParams = new ClientRpcParams
-                {
-                    Send = new ClientRpcSendParams
-                    {
-                        TargetClientIds = new ulong[] { clientId }
-                    }
-                };
-
-                // Tell that specific client to move to the spawn point
-                TeleportPlayerClientRpc(newTransform.position, newTransform.rotation, clientRpcParams);
+                player.transform.position = newTransform.position;
+                player.transform.rotation = newTransform.rotation;
             }
 
-            // Increment player count
             m_PlayersCount++;
-            Debug.Log("Player " + player.playerID + " joined the game. Total players: " + m_PlayersCount);
+            Debug.Log($"Player joined! Total: {m_PlayersCount}");
         }
 
-        [ClientRpc]
-        private void TeleportPlayerClientRpc(Vector3 spawnPosition, Quaternion spawnRotation, ClientRpcParams clientRpcParams = default)
+        private void DealCardAtStart()
         {
-            // Find our local player and move it
-            if (NetworkManager.Singleton.LocalClient.PlayerObject != null)
+            if (!IsServer) return;
+
+            for (int i = 0; i < GameManager.Instance.startingCard; i++)
             {
-                Transform localPlayerTransform = NetworkManager.Singleton.LocalClient.PlayerObject.transform;
-                localPlayerTransform.position = spawnPosition;
-                localPlayerTransform.rotation = spawnRotation;
+                for (int j = 0; j < m_PlayersCount; j++)
+                {
+                    DealCardToPlayer(j);
+                }
             }
+        }
+
+        private void DealCardToPlayer(int playerIndex)
+        {
+            if (!IsServer) return;
+
+            PlayerHand playerHand = GetPlayerHand(playerIndex);
+
+            if (playerHand != null)
+            {
+                playerHand.DrawCard();
+            }
+        }
+
+        private PlayerHand GetPlayerHand(int playerIndex)
+        {
+            return playerIndex switch
+            {
+                0 => player1Hand,
+                1 => player2Hand,
+                2 => player3Hand,
+                3 => player4Hand,
+                _ => throw new ArgumentException("Invalid player ID")
+            };
         }
 
         public void BroadcastPlayerTurn(int playerIndex)
@@ -111,23 +132,36 @@ namespace Managers
             Player activePlayer = m_Players[playerIndex];
             if (activePlayer != null)
             {
-                SetPlayerTurnClientRpc(activePlayer.NetworkObjectId);
+                SetPlayerTurnRpc(activePlayer.NetworkObjectId);
             }
         }
 
-        // UPDATED METHOD: The server broadcasts this, and all clients execute it
-        [ClientRpc]
-        public void SetPlayerTurnClientRpc(ulong activePlayerNetworkId, ClientRpcParams clientRpcParams = default)
+        [Rpc(SendTo.Server)]
+        public void UpdatePlayerLookInputRpc(ulong clientId, float rotation)
         {
-            // Because clients don't have the m_Players list, we just find all Player objects in the scene
+            Player player = m_Players.FirstOrDefault(p => p != null && p.OwnerClientId == clientId);
+            if (player != null)
+            {
+                // Update the player's transform on the server
+                player.transform.Rotate(Vector3.up, rotation);
+            }
+        }
+
+        [Rpc(SendTo.ClientsAndHost)]
+        public void SetPlayerTurnRpc(ulong activePlayerNetworkId)
+        {
             Player[] allPlayers = FindObjectsByType<Player>(FindObjectsSortMode.None);
 
             foreach (Player p in allPlayers)
             {
-                // If this player's ID matches the one the server sent, turn their visual on!
                 bool isTheirTurn = p.NetworkObjectId == activePlayerNetworkId;
                 p.SetPlayerTurn(isTheirTurn);
             }
+        }
+
+        public int GetPlayerCount()
+        {
+            return m_PlayersCount;
         }
 
         private Transform GetPlayerSpawnPoint(int playerIndex)

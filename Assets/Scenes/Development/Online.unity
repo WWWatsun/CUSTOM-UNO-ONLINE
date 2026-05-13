@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2755979}
+  - component: {fileID: 2755980}
   - component: {fileID: 2755978}
   m_Layer: 0
   m_Name: Game Manager
@@ -148,6 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b7e9a0920db0a84990b504398b8b9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  ShowTopMostFoldoutHeaderGroup: 1
+  tablePrefab: {fileID: 6086836750360323281, guid: 4669dcb0ae018b545a4738bfbebe13eb, type: 3}
+  tableSpawnPosition: {fileID: 117053516}
 --- !u!4 &2755979
 Transform:
   m_ObjectHideFlags: 0
@@ -158,6 +162,62 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2755980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2755977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 2450121051
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!1 &117053515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 117053516}
+  m_Layer: 0
+  m_Name: Table Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &117053516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117053515}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -175,7 +235,7 @@ GameObject:
   - component: {fileID: 320798058}
   - component: {fileID: 320798060}
   m_Layer: 0
-  m_Name: Netwok Manager
+  m_Name: Network Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -332,6 +392,80 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &561327127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 561327128}
+  - component: {fileID: 561327129}
+  - component: {fileID: 561327130}
+  m_Layer: 0
+  m_Name: Player 1 Hand Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &561327128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561327127}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &561327129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561327127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 357820585
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!114 &561327130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561327127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37bd3f7de1f163c468c18dd5c4ba32bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerScripts.PlayerHand
+  ShowTopMostFoldoutHeaderGroup: 1
+  handList: []
+  cardPrefab: {fileID: 4407431205922775172, guid: b007b655a9cdf6241916b2e30dbce611, type: 3}
+  cardSpacing: 0.5
 --- !u!1 &628513633
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +491,7 @@ Transform:
   m_GameObject: {fileID: 628513633}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.69223, y: -0, z: -5.22169}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -791,6 +925,10 @@ MonoBehaviour:
   player2SpawnPoint: {fileID: 436786812}
   player3SpawnPoint: {fileID: 1815794011}
   player4SpawnPoint: {fileID: 1757193285}
+  player1Hand: {fileID: 561327130}
+  player2Hand: {fileID: 1763552856}
+  player3Hand: {fileID: 1702337966}
+  player4Hand: {fileID: 1980093799}
 --- !u!4 &1318877170
 Transform:
   m_ObjectHideFlags: 0
@@ -800,7 +938,7 @@ Transform:
   m_GameObject: {fileID: 1318877168}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.13191, y: -0, z: -2.66354}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -819,6 +957,188 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
   GlobalObjectIdHash: 2586529419
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!1 &1365922793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1365922795}
+  - component: {fileID: 1365922796}
+  - component: {fileID: 1365922794}
+  m_Layer: 0
+  m_Name: Deck Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1365922794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365922793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1af5f27131c8034eaf3475b934eed38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  ShowTopMostFoldoutHeaderGroup: 1
+  cardDeck:
+  - {fileID: 11400000, guid: 8f89d92614f665e4c86045c9f2a5f460, type: 2}
+  - {fileID: 11400000, guid: 3d5906ba1f2cba248a405b16baaa9556, type: 2}
+  - {fileID: 11400000, guid: ae66bb1951354914aa30a6f509aa1b8c, type: 2}
+  - {fileID: 11400000, guid: d8fb1a9f79074314aa90023c8b92bd41, type: 2}
+  - {fileID: 11400000, guid: 793037d1fbb12a1409a79d2d6b5b816a, type: 2}
+  - {fileID: 11400000, guid: 20148db5752f2484789d12ba0516271f, type: 2}
+  - {fileID: 11400000, guid: ff9bd0a856160824686b6df4be2d47ca, type: 2}
+  - {fileID: 11400000, guid: fb177791067932f4bb8780a1be8ac335, type: 2}
+  - {fileID: 11400000, guid: 48e1ff3477331d84fbd72bed3fc45a03, type: 2}
+  - {fileID: 11400000, guid: 7c970ad740360bd49ab5c9bf48a38b97, type: 2}
+  - {fileID: 11400000, guid: 6cdccf79d4c87e54ca21fa478bd13d3b, type: 2}
+  - {fileID: 11400000, guid: 6db1463723de76f4cac4b3d142c42893, type: 2}
+  - {fileID: 11400000, guid: 270fc2e112643904eb7212f0d0639b3e, type: 2}
+  - {fileID: 11400000, guid: 3d5906ba1f2cba248a405b16baaa9556, type: 2}
+  - {fileID: 11400000, guid: ae66bb1951354914aa30a6f509aa1b8c, type: 2}
+  - {fileID: 11400000, guid: d8fb1a9f79074314aa90023c8b92bd41, type: 2}
+  - {fileID: 11400000, guid: 793037d1fbb12a1409a79d2d6b5b816a, type: 2}
+  - {fileID: 11400000, guid: 20148db5752f2484789d12ba0516271f, type: 2}
+  - {fileID: 11400000, guid: ff9bd0a856160824686b6df4be2d47ca, type: 2}
+  - {fileID: 11400000, guid: fb177791067932f4bb8780a1be8ac335, type: 2}
+  - {fileID: 11400000, guid: 48e1ff3477331d84fbd72bed3fc45a03, type: 2}
+  - {fileID: 11400000, guid: 7c970ad740360bd49ab5c9bf48a38b97, type: 2}
+  - {fileID: 11400000, guid: 6cdccf79d4c87e54ca21fa478bd13d3b, type: 2}
+  - {fileID: 11400000, guid: 6db1463723de76f4cac4b3d142c42893, type: 2}
+  - {fileID: 11400000, guid: 270fc2e112643904eb7212f0d0639b3e, type: 2}
+  - {fileID: 11400000, guid: 8004d6deae9379842a1b7702ce57d1a7, type: 2}
+  - {fileID: 11400000, guid: 71771a4d59fdf014ba4a9ab47cc8cb8f, type: 2}
+  - {fileID: 11400000, guid: f5c95be70f90c404789d245b8b732d3b, type: 2}
+  - {fileID: 11400000, guid: 88e18c3a681ccb345b30a7a8ebd84ecb, type: 2}
+  - {fileID: 11400000, guid: 0d456dc095dc7c342bf2753faf04fdbd, type: 2}
+  - {fileID: 11400000, guid: 6a387a0375927a346a288eb6a46904d1, type: 2}
+  - {fileID: 11400000, guid: 7190de56906a7b24d99dd9c7bfe71c5c, type: 2}
+  - {fileID: 11400000, guid: 028f46f65e867c74e8a9be6bfbb34b45, type: 2}
+  - {fileID: 11400000, guid: b5ac91621e3de214db9d7b9d8b1a3e0a, type: 2}
+  - {fileID: 11400000, guid: 80b65352e5f2b57479208056ea741a62, type: 2}
+  - {fileID: 11400000, guid: b982a2924c59ca44f8dc3511df01df4c, type: 2}
+  - {fileID: 11400000, guid: f60b8f66c685dbf4b895a1fff804a9b9, type: 2}
+  - {fileID: 11400000, guid: 01f8ef288c5f52e45ae2f207566b4e45, type: 2}
+  - {fileID: 11400000, guid: 71771a4d59fdf014ba4a9ab47cc8cb8f, type: 2}
+  - {fileID: 11400000, guid: f5c95be70f90c404789d245b8b732d3b, type: 2}
+  - {fileID: 11400000, guid: 88e18c3a681ccb345b30a7a8ebd84ecb, type: 2}
+  - {fileID: 11400000, guid: 0d456dc095dc7c342bf2753faf04fdbd, type: 2}
+  - {fileID: 11400000, guid: 6a387a0375927a346a288eb6a46904d1, type: 2}
+  - {fileID: 11400000, guid: 7190de56906a7b24d99dd9c7bfe71c5c, type: 2}
+  - {fileID: 11400000, guid: 028f46f65e867c74e8a9be6bfbb34b45, type: 2}
+  - {fileID: 11400000, guid: b5ac91621e3de214db9d7b9d8b1a3e0a, type: 2}
+  - {fileID: 11400000, guid: 80b65352e5f2b57479208056ea741a62, type: 2}
+  - {fileID: 11400000, guid: b982a2924c59ca44f8dc3511df01df4c, type: 2}
+  - {fileID: 11400000, guid: f60b8f66c685dbf4b895a1fff804a9b9, type: 2}
+  - {fileID: 11400000, guid: 01f8ef288c5f52e45ae2f207566b4e45, type: 2}
+  - {fileID: 11400000, guid: 41b87d94dd1fba44ea7df060444d83ae, type: 2}
+  - {fileID: 11400000, guid: 6bb04482d1efb3b49ad7c7bcf53c1fed, type: 2}
+  - {fileID: 11400000, guid: 293b5bb1ebc634547b84a74d915ce85a, type: 2}
+  - {fileID: 11400000, guid: a1442a8fba763a449a99476931e42f8f, type: 2}
+  - {fileID: 11400000, guid: acd4280f0870da846b0612132285a46e, type: 2}
+  - {fileID: 11400000, guid: 21412918627c58a4b8fcb4e5ad9fab78, type: 2}
+  - {fileID: 11400000, guid: 39e95b52e019d65418e56fc9e1843b09, type: 2}
+  - {fileID: 11400000, guid: 02d1851ad10344e4f89dcb86c7d44260, type: 2}
+  - {fileID: 11400000, guid: 428986380063b4a48b2b928aab9c6013, type: 2}
+  - {fileID: 11400000, guid: 985c155f73689104f82e77516baad1b3, type: 2}
+  - {fileID: 11400000, guid: d8b2aabab41e856489610e3ce2a57689, type: 2}
+  - {fileID: 11400000, guid: 4604fbff50a575743b5af9de4f3f78b4, type: 2}
+  - {fileID: 11400000, guid: 37cca1235edecc34b9c3700fcb6ccdd4, type: 2}
+  - {fileID: 11400000, guid: 6bb04482d1efb3b49ad7c7bcf53c1fed, type: 2}
+  - {fileID: 11400000, guid: 293b5bb1ebc634547b84a74d915ce85a, type: 2}
+  - {fileID: 11400000, guid: a1442a8fba763a449a99476931e42f8f, type: 2}
+  - {fileID: 11400000, guid: acd4280f0870da846b0612132285a46e, type: 2}
+  - {fileID: 11400000, guid: 21412918627c58a4b8fcb4e5ad9fab78, type: 2}
+  - {fileID: 11400000, guid: 39e95b52e019d65418e56fc9e1843b09, type: 2}
+  - {fileID: 11400000, guid: 02d1851ad10344e4f89dcb86c7d44260, type: 2}
+  - {fileID: 11400000, guid: 428986380063b4a48b2b928aab9c6013, type: 2}
+  - {fileID: 11400000, guid: 985c155f73689104f82e77516baad1b3, type: 2}
+  - {fileID: 11400000, guid: d8b2aabab41e856489610e3ce2a57689, type: 2}
+  - {fileID: 11400000, guid: 4604fbff50a575743b5af9de4f3f78b4, type: 2}
+  - {fileID: 11400000, guid: 37cca1235edecc34b9c3700fcb6ccdd4, type: 2}
+  - {fileID: 11400000, guid: 340e4237836e5b64298199eb7d8a4a32, type: 2}
+  - {fileID: 11400000, guid: 610541f2062094e43aed69d7d05d26fb, type: 2}
+  - {fileID: 11400000, guid: a825114b3ba9f854f8092c31dc0415fe, type: 2}
+  - {fileID: 11400000, guid: 1ec701d7c7bc526449f00ef68c3b7d16, type: 2}
+  - {fileID: 11400000, guid: d0e1b54af95a3624b9f36ef72727e0a2, type: 2}
+  - {fileID: 11400000, guid: 75ead6df82a3d864784125d868db7e29, type: 2}
+  - {fileID: 11400000, guid: 3a953f5cc27d42f47a2c11c7cb8cc17e, type: 2}
+  - {fileID: 11400000, guid: 1dbf6bde79466b44e9008f89ba973835, type: 2}
+  - {fileID: 11400000, guid: cfb195955da7b4447804a49c33d70f62, type: 2}
+  - {fileID: 11400000, guid: dfbabe1e4de341a4aa1d3bf621b0c4ed, type: 2}
+  - {fileID: 11400000, guid: 485acc288b2b0244988dc3eabd507ddd, type: 2}
+  - {fileID: 11400000, guid: 311d74e970c067a41ab575113d9c589b, type: 2}
+  - {fileID: 11400000, guid: acbf5bc162097e64ba92b5ea9a71678b, type: 2}
+  - {fileID: 11400000, guid: 610541f2062094e43aed69d7d05d26fb, type: 2}
+  - {fileID: 11400000, guid: a825114b3ba9f854f8092c31dc0415fe, type: 2}
+  - {fileID: 11400000, guid: 1ec701d7c7bc526449f00ef68c3b7d16, type: 2}
+  - {fileID: 11400000, guid: d0e1b54af95a3624b9f36ef72727e0a2, type: 2}
+  - {fileID: 11400000, guid: 75ead6df82a3d864784125d868db7e29, type: 2}
+  - {fileID: 11400000, guid: 3a953f5cc27d42f47a2c11c7cb8cc17e, type: 2}
+  - {fileID: 11400000, guid: 1dbf6bde79466b44e9008f89ba973835, type: 2}
+  - {fileID: 11400000, guid: cfb195955da7b4447804a49c33d70f62, type: 2}
+  - {fileID: 11400000, guid: dfbabe1e4de341a4aa1d3bf621b0c4ed, type: 2}
+  - {fileID: 11400000, guid: 485acc288b2b0244988dc3eabd507ddd, type: 2}
+  - {fileID: 11400000, guid: 311d74e970c067a41ab575113d9c589b, type: 2}
+  - {fileID: 11400000, guid: acbf5bc162097e64ba92b5ea9a71678b, type: 2}
+  - {fileID: 11400000, guid: 9b256f6ff6dff4640b7443ec1ca15bcb, type: 2}
+  - {fileID: 11400000, guid: c490ea8332835ba4f92ef079ce4c7a7a, type: 2}
+  - {fileID: 11400000, guid: 9b256f6ff6dff4640b7443ec1ca15bcb, type: 2}
+  - {fileID: 11400000, guid: c490ea8332835ba4f92ef079ce4c7a7a, type: 2}
+  - {fileID: 11400000, guid: 9b256f6ff6dff4640b7443ec1ca15bcb, type: 2}
+  - {fileID: 11400000, guid: c490ea8332835ba4f92ef079ce4c7a7a, type: 2}
+  - {fileID: 11400000, guid: 9b256f6ff6dff4640b7443ec1ca15bcb, type: 2}
+  - {fileID: 11400000, guid: c490ea8332835ba4f92ef079ce4c7a7a, type: 2}
+  activeDeck: []
+  discardPile: []
+--- !u!4 &1365922795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365922793}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1365922796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365922793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 1068541625
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1105,7 +1425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1472541482}
   m_Layer: 0
-  m_Name: ----- PLAYERS -----
+  m_Name: ----- SPAWN POINTS -----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1120,7 +1440,38 @@ Transform:
   m_GameObject: {fileID: 1472541481}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09598, y: -0, z: -1.83242}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1627436636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1627436637}
+  m_Layer: 0
+  m_Name: ----- PLAYERS -----
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1627436637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627436636}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1151,12 +1502,86 @@ Transform:
   m_GameObject: {fileID: 1655716617}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09598, y: -0, z: -1.83242}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1702337963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1702337964}
+  - component: {fileID: 1702337965}
+  - component: {fileID: 1702337966}
+  m_Layer: 0
+  m_Name: Player 3 Hand Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1702337964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702337963}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1702337965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702337963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 3818305166
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!114 &1702337966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702337963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37bd3f7de1f163c468c18dd5c4ba32bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerScripts.PlayerHand
+  ShowTopMostFoldoutHeaderGroup: 1
+  handList: []
+  cardPrefab: {fileID: 4407431205922775172, guid: b007b655a9cdf6241916b2e30dbce611, type: 3}
+  cardSpacing: 0.5
 --- !u!1 &1729007326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,6 +1783,80 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &1763552853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1763552854}
+  - component: {fileID: 1763552855}
+  - component: {fileID: 1763552856}
+  m_Layer: 0
+  m_Name: Player 2 Hand Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1763552854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763552853}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -3, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1763552855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763552853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 101981352
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!114 &1763552856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763552853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37bd3f7de1f163c468c18dd5c4ba32bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerScripts.PlayerHand
+  ShowTopMostFoldoutHeaderGroup: 1
+  handList: []
+  cardPrefab: {fileID: 4407431205922775172, guid: b007b655a9cdf6241916b2e30dbce611, type: 3}
+  cardSpacing: 0.5
 --- !u!1 &1784385629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1593,6 +2092,80 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &1980093796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1980093797}
+  - component: {fileID: 1980093798}
+  - component: {fileID: 1980093799}
+  m_Layer: 0
+  m_Name: Player 4 Hand Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1980093797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980093796}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1980093798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980093796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 3609618600
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!114 &1980093799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980093796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37bd3f7de1f163c468c18dd5c4ba32bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerScripts.PlayerHand
+  ShowTopMostFoldoutHeaderGroup: 1
+  handList: []
+  cardPrefab: {fileID: 4407431205922775172, guid: b007b655a9cdf6241916b2e30dbce611, type: 3}
+  cardSpacing: 0.5
 --- !u!1 &2087610562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,12 +2280,19 @@ SceneRoots:
   - {fileID: 320798059}
   - {fileID: 1800109939}
   - {fileID: 1318877170}
+  - {fileID: 1365922795}
   - {fileID: 1472541482}
+  - {fileID: 117053516}
   - {fileID: 544285961}
+  - {fileID: 561327128}
   - {fileID: 436786812}
+  - {fileID: 1763552854}
   - {fileID: 1815794011}
+  - {fileID: 1702337964}
   - {fileID: 1757193285}
+  - {fileID: 1980093797}
   - {fileID: 628513634}
   - {fileID: 2087610566}
   - {fileID: 962400509}
   - {fileID: 730502781}
+  - {fileID: 1627436637}

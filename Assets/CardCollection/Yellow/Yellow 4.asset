@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardScriptables
   cardValue: 4
   cardColor: 3
-  cardSprite: {fileID: 21300000, guid: 8839ef803dfd8a348bf63703bb20072c, type: 3}
+  cardSprite: {fileID: 1817857363, guid: 65c85f0376b717e4996a4778ff8f8e9e, type: 3}

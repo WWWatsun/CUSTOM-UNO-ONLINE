@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -37,13 +37,13 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -52,9 +52,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -95,12 +95,1112 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_0
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 2781
+        width: 324
+        height: 507
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8851e06eed83a484e9bfedd8d416ca7a
+      internalID: -1570715667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_1
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 2781
+        width: 327
+        height: 507
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1b467a9cd2140c40b023fdbd91ed9d8
+      internalID: 1866787155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_2
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 2781
+        width: 327
+        height: 507
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21ee7045276cab849b3a3f40f6fdc569
+      internalID: -1234891294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_3
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 2781
+        width: 328
+        height: 507
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9a2e5c22242f9748b2974b6e3252109
+      internalID: 1817857363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_4
+      rect:
+        serializedVersion: 2
+        x: 1604
+        y: 2781
+        width: 327
+        height: 507
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 948df0577637d5a408271e4f32d7ac93
+      internalID: -537545855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_5
+      rect:
+        serializedVersion: 2
+        x: 1977
+        y: 2781
+        width: 327
+        height: 507
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5da03c9a54d159d40a5e28f7c3a88c42
+      internalID: -459994776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_6
+      rect:
+        serializedVersion: 2
+        x: 2350
+        y: 2781
+        width: 327
+        height: 507
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87c1cb1327169b74284f6b18b5b15e9b
+      internalID: -1455705797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_7
+      rect:
+        serializedVersion: 2
+        x: 2721
+        y: 2781
+        width: 327
+        height: 507
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7a2f894933b05e4d9400395cd2f255a
+      internalID: 1797694902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_8
+      rect:
+        serializedVersion: 2
+        x: 3094
+        y: 2781
+        width: 327
+        height: 507
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1421440643778b548bb014b535aad18f
+      internalID: -1206696662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_9
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 2781
+        width: 327
+        height: 507
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12c3e77d5b437d74b84eecc173290453
+      internalID: 781010720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_10
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 2221
+        width: 324
+        height: 506
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d68570d8d026e974db846be3bc9b7361
+      internalID: -1487663938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_11
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 2221
+        width: 327
+        height: 506
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7024a8d64a84b741961330d71e24a2c
+      internalID: -486660169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_12
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 2221
+        width: 327
+        height: 506
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34b1ad9015f52204891c98cf976306d7
+      internalID: 1415819543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_13
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 2221
+        width: 328
+        height: 506
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0f24670db9db28429613a4062611353
+      internalID: -1966801608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_14
+      rect:
+        serializedVersion: 2
+        x: 1604
+        y: 2221
+        width: 327
+        height: 506
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5013fe729f59c9c4eaf83bee005f4bf8
+      internalID: -2130200578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_15
+      rect:
+        serializedVersion: 2
+        x: 1977
+        y: 2221
+        width: 327
+        height: 506
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7063f545e46eb9449366dbdbbe24096
+      internalID: -1423056395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_16
+      rect:
+        serializedVersion: 2
+        x: 2350
+        y: 2221
+        width: 327
+        height: 506
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 752f19c259f56de42b8d2c48f739d61d
+      internalID: 912825787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_17
+      rect:
+        serializedVersion: 2
+        x: 2721
+        y: 2221
+        width: 327
+        height: 506
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76f3005e13010ae4db09cf5d999a225f
+      internalID: -1842290262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_18
+      rect:
+        serializedVersion: 2
+        x: 3094
+        y: 2221
+        width: 327
+        height: 506
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d371b3eeadc2134fb8478a09b6bbd09
+      internalID: 128750080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_19
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 2221
+        width: 327
+        height: 506
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d9e2550440c6f845bb3d144ca8db92a
+      internalID: 29813852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_20
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 1673
+        width: 324
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3bf1c6e019b2384089044f4a543ce5c
+      internalID: -1933403491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_21
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 1673
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d11dc64aced2f9945af9d47c1ddc1d12
+      internalID: 83997301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_22
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 1673
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f61d07e08be2cbb429c4c835dd69550d
+      internalID: 1989307956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_23
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 1673
+        width: 328
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0353b2ac0553a3246be75c513e91b6cf
+      internalID: -1706541315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_24
+      rect:
+        serializedVersion: 2
+        x: 1604
+        y: 1673
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3e237443b70af0448be1ec96e3a60e9
+      internalID: 49001773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_25
+      rect:
+        serializedVersion: 2
+        x: 1977
+        y: 1673
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c6635500c2d4b845a2c73e9011ec65d
+      internalID: -1025920414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_26
+      rect:
+        serializedVersion: 2
+        x: 2350
+        y: 1673
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27da98fa26369774e975ce207b124823
+      internalID: -1775038807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_27
+      rect:
+        serializedVersion: 2
+        x: 2721
+        y: 1673
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39082c99bc3e5b942aea7b3194e3c5c5
+      internalID: 936401567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_28
+      rect:
+        serializedVersion: 2
+        x: 3094
+        y: 1673
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dff273065a1cd941b55a09c992cd48d
+      internalID: 1978824443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_29
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 1673
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fa129f2f77bdd141a65f1350a1887f7
+      internalID: 1098189426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_30
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 1129
+        width: 324
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a134a51e39f924d49847436f8089da19
+      internalID: 1712974588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_31
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 1129
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cf0ad7e867dac54bbe6a107ba5e925d
+      internalID: -886495823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_32
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 1129
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fabfcc9026ed8ce4caf9e7fa4396ea05
+      internalID: -1550008295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_33
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 1129
+        width: 328
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b19a666b8a4c1a04998b66fd6b7675c3
+      internalID: 474718812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_34
+      rect:
+        serializedVersion: 2
+        x: 1604
+        y: 1129
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c2003fe751da5b46b4ba48c1e9efe32
+      internalID: 1383383043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_35
+      rect:
+        serializedVersion: 2
+        x: 1977
+        y: 1129
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fc154f343cb5544c9a307022d07fa47
+      internalID: -1313206834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_36
+      rect:
+        serializedVersion: 2
+        x: 2350
+        y: 1129
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1404e97e57bdda49b492c3fdc495639
+      internalID: -237756521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_37
+      rect:
+        serializedVersion: 2
+        x: 2721
+        y: 1129
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a848ce1158188c446899ebf17ce5afbc
+      internalID: 447128958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_38
+      rect:
+        serializedVersion: 2
+        x: 3094
+        y: 1129
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecda626c23d3e914d8af48a6ec7ee81d
+      internalID: 1426851307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_39
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 1129
+        width: 327
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18f4a51725089de4f968df7cfdda2e2b
+      internalID: 966688131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_40
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 574
+        width: 324
+        height: 505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 532b4ce87e891204cac8764290f254ad
+      internalID: 1468426435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_41
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 574
+        width: 327
+        height: 505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 882d09817e2607944b73cac36e382e04
+      internalID: 123445997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_42
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 574
+        width: 327
+        height: 505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08033a68145dece4aa68f5fdc9ed9624
+      internalID: -1398057817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_43
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 574
+        width: 328
+        height: 505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0eff49b47661b45448ad7c050806861f
+      internalID: 1225583571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_44
+      rect:
+        serializedVersion: 2
+        x: 1604
+        y: 574
+        width: 327
+        height: 505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdec0f000afa00347af3c35cee58faf0
+      internalID: -1048687087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_45
+      rect:
+        serializedVersion: 2
+        x: 1977
+        y: 574
+        width: 327
+        height: 505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 188bd891d21d91d43bbef95d10fde4f3
+      internalID: -1114308234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_46
+      rect:
+        serializedVersion: 2
+        x: 2350
+        y: 574
+        width: 327
+        height: 505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08a1979d1123b394a8c16e5a785069fb
+      internalID: -1323955860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_47
+      rect:
+        serializedVersion: 2
+        x: 2721
+        y: 574
+        width: 327
+        height: 505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edf5dca5a671c9a48b65622daa8b5320
+      internalID: -860151266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_48
+      rect:
+        serializedVersion: 2
+        x: 3094
+        y: 574
+        width: 327
+        height: 505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c68c129d0fbf584ea040e1c1a98f202
+      internalID: -1861917100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4ColourCardsNumberedSheetByVerzatileDev_49
+      rect:
+        serializedVersion: 2
+        x: 3467
+        y: 574
+        width: 327
+        height: 505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07cf1f78a4ee1e144a889bc5eaf84701
+      internalID: -187129936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 81685127dccfe794795d6cdc9f15cd95
     internalID: 0
     vertices: []
     indices: 
@@ -108,8 +1208,60 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
-    nameFileIdTable: {}
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      4ColourCardsNumberedSheetByVerzatileDev_0: -1570715667
+      4ColourCardsNumberedSheetByVerzatileDev_1: 1866787155
+      4ColourCardsNumberedSheetByVerzatileDev_10: -1487663938
+      4ColourCardsNumberedSheetByVerzatileDev_11: -486660169
+      4ColourCardsNumberedSheetByVerzatileDev_12: 1415819543
+      4ColourCardsNumberedSheetByVerzatileDev_13: -1966801608
+      4ColourCardsNumberedSheetByVerzatileDev_14: -2130200578
+      4ColourCardsNumberedSheetByVerzatileDev_15: -1423056395
+      4ColourCardsNumberedSheetByVerzatileDev_16: 912825787
+      4ColourCardsNumberedSheetByVerzatileDev_17: -1842290262
+      4ColourCardsNumberedSheetByVerzatileDev_18: 128750080
+      4ColourCardsNumberedSheetByVerzatileDev_19: 29813852
+      4ColourCardsNumberedSheetByVerzatileDev_2: -1234891294
+      4ColourCardsNumberedSheetByVerzatileDev_20: -1933403491
+      4ColourCardsNumberedSheetByVerzatileDev_21: 83997301
+      4ColourCardsNumberedSheetByVerzatileDev_22: 1989307956
+      4ColourCardsNumberedSheetByVerzatileDev_23: -1706541315
+      4ColourCardsNumberedSheetByVerzatileDev_24: 49001773
+      4ColourCardsNumberedSheetByVerzatileDev_25: -1025920414
+      4ColourCardsNumberedSheetByVerzatileDev_26: -1775038807
+      4ColourCardsNumberedSheetByVerzatileDev_27: 936401567
+      4ColourCardsNumberedSheetByVerzatileDev_28: 1978824443
+      4ColourCardsNumberedSheetByVerzatileDev_29: 1098189426
+      4ColourCardsNumberedSheetByVerzatileDev_3: 1817857363
+      4ColourCardsNumberedSheetByVerzatileDev_30: 1712974588
+      4ColourCardsNumberedSheetByVerzatileDev_31: -886495823
+      4ColourCardsNumberedSheetByVerzatileDev_32: -1550008295
+      4ColourCardsNumberedSheetByVerzatileDev_33: 474718812
+      4ColourCardsNumberedSheetByVerzatileDev_34: 1383383043
+      4ColourCardsNumberedSheetByVerzatileDev_35: -1313206834
+      4ColourCardsNumberedSheetByVerzatileDev_36: -237756521
+      4ColourCardsNumberedSheetByVerzatileDev_37: 447128958
+      4ColourCardsNumberedSheetByVerzatileDev_38: 1426851307
+      4ColourCardsNumberedSheetByVerzatileDev_39: 966688131
+      4ColourCardsNumberedSheetByVerzatileDev_4: -537545855
+      4ColourCardsNumberedSheetByVerzatileDev_40: 1468426435
+      4ColourCardsNumberedSheetByVerzatileDev_41: 123445997
+      4ColourCardsNumberedSheetByVerzatileDev_42: -1398057817
+      4ColourCardsNumberedSheetByVerzatileDev_43: 1225583571
+      4ColourCardsNumberedSheetByVerzatileDev_44: -1048687087
+      4ColourCardsNumberedSheetByVerzatileDev_45: -1114308234
+      4ColourCardsNumberedSheetByVerzatileDev_46: -1323955860
+      4ColourCardsNumberedSheetByVerzatileDev_47: -860151266
+      4ColourCardsNumberedSheetByVerzatileDev_48: -1861917100
+      4ColourCardsNumberedSheetByVerzatileDev_49: -187129936
+      4ColourCardsNumberedSheetByVerzatileDev_5: -459994776
+      4ColourCardsNumberedSheetByVerzatileDev_6: -1455705797
+      4ColourCardsNumberedSheetByVerzatileDev_7: 1797694902
+      4ColourCardsNumberedSheetByVerzatileDev_8: -1206696662
+      4ColourCardsNumberedSheetByVerzatileDev_9: 781010720
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

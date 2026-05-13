@@ -14,6 +14,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: bf47f07ab99d4b94d81d5225c432bcc6
+  - enabled: 1
+    path: Assets/Scenes/Development/Gameplay.unity
+    guid: 198a8c78d545a354aa3f8a09e000eabd
+  - enabled: 1
+    path: Assets/Scenes/Development/Online.unity
+    guid: bbb87adf26b50c144a2f5ee652548fd2
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: b34d7074cf6030d47bc2cb52027b7acc, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

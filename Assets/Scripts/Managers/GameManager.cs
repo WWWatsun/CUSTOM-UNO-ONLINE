@@ -4,14 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using Unity.Netcode;
 using PlayerScripts;
 
 namespace Managers
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : NetworkBehaviour
     {
         public static GameManager Instance { get; private set; }
         public Action OnStartGame;
+
+        [Header("Environment Settings")]
+        [SerializeField] GameObject tablePrefab;
+        [SerializeField] Transform tableSpawnPosition;
+
+        [Header("Game Settings")]
+        public int startingCard { get; private set; } = 7;
 
         private void Awake()
         {
@@ -23,27 +31,34 @@ namespace Managers
             {
                 Destroy(gameObject);
             }
-            Instance.OnStartGame += DealingOnStart;
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            if (IsServer)
+            {
+                SpawnTable();
+            }
         }
 
         public void StartGame()
         {
+            if (!IsServer) return;
+
             OnStartGame?.Invoke();
             //DealingOnStart();
         }
 
-
-        [SerializeField] int startingCard = 7;
-        public void DealingOnStart()
+        private void SpawnTable()
         {
-            PlayerHand[] players = FindObjectsByType<PlayerHand>(FindObjectsSortMode.None);
-            for (int i=0; i<startingCard; i++)
+            // 1. Create the object in the Unity Scene on the Server's machine
+            GameObject spawnedTable = Instantiate(tablePrefab, tableSpawnPosition.position, tableSpawnPosition.rotation);
+
+            // 2. Tell Netcode to sync this object to all connected clients
+            NetworkObject tableNetworkObject = spawnedTable.GetComponent<NetworkObject>();
+            if (tableNetworkObject != null)
             {
-                foreach(PlayerHand p in players)
-                {
-                    Debug.Log($"Deal card number {i+1}");
-                    p.DrawCard();
-                }
+                tableNetworkObject.Spawn(); // This is the magic word!
             }
         }
     }
