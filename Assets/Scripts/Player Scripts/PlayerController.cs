@@ -110,22 +110,6 @@ namespace PlayerScripts
                 }
             }
         }
-
-        [Rpc(SendTo.Server)]
-        private void RequestCardActionRpc(ulong networkObjectId)
-        {
-            // The Server finds the object by ID
-            if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(networkObjectId, out NetworkObject netObj))
-            {
-                //DeckManager.Instance.GetDiscarded(netObj.GetComponent<Card>());
-
-                // Despawn and Destroy across the network
-                netObj.Despawn(true);
-
-                // Note: You may need to call UpdateHandLayout on the 
-                // PlayerHand script after this to close the gap!
-            }
-        }
     }
 }
 

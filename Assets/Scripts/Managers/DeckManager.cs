@@ -14,6 +14,12 @@ namespace Managers
         [SerializeField] List<CardScriptables> activeDeck = new List<CardScriptables>();
         [SerializeField] List<CardScriptables> discardPile = new List<CardScriptables>();
 
+        [Header("References")]
+        [SerializeField] private GameObject cardPrefab;
+        [SerializeField] private Transform discardPilePosition;
+
+        private GameObject discardPileDisplay;
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -33,6 +39,27 @@ namespace Managers
             }
 
             Shuffle();
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+            if (IsServer)
+            {
+                InitDiscardPileDisplay();
+            }
+        }
+
+        private void InitDiscardPileDisplay()
+        {
+            if (!IsServer) return;
+
+            discardPileDisplay = Instantiate(cardPrefab, discardPilePosition.position, discardPilePosition.rotation);
+            NetworkObject discardPileDisplayNetworkObject = discardPileDisplay.GetComponent<NetworkObject>();
+            discardPileDisplayNetworkObject.Spawn();
+            discardPileDisplayNetworkObject.TrySetParent(discardPilePosition);
+
+            discardPileDisplay.transform.localScale = Vector3.one * 0.5f;
         }
 
         public void Shuffle()
@@ -74,6 +101,8 @@ namespace Managers
         public void GetDiscarded(CardScriptables card)
         {
             discardPile.Add(card);
+
+            discardPileDisplay.GetComponent<Card>().SetCard(card.cardID);
         }
 
         public CardScriptables GetCardData(int cardID)

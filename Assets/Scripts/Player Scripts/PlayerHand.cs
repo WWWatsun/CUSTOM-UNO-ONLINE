@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using Managers;
-using Unity.VisualScripting;
-using UnityEngine.UIElements;
 
 namespace PlayerScripts
 {
@@ -38,12 +36,16 @@ namespace PlayerScripts
         {
             int index = cardObjects.FindIndex(c => c.GetComponent<NetworkObject>().NetworkObjectId == cardNetworkId);
             if (index < 0 || index >= handList.Count) return;
+
             CardScriptables cardToDiscard = handList[index];
             handList.RemoveAt(index);
             GameObject cardObject = cardObjects[index];
             cardObjects.RemoveAt(index);
             Destroy(cardObject);
             UpdateHandLayout();
+
+            DeckManager.Instance.GetDiscarded(cardToDiscard);
+
             Debug.Log($"Discard Card: {cardToDiscard.CardName()}");
         }
 

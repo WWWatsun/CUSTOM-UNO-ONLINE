@@ -48,4 +48,9 @@ public class Card : NetworkBehaviour
     {
         m_CardID.OnValueChanged -= OnCardIDChanged;
     }
+
+    public CardScriptables GetCardData()
+    {
+        return DeckManager.Instance.GetCardData(m_CardID.Value);
+    }
 }
