@@ -373,6 +373,9 @@ MonoBehaviour:
   playerCamera: {fileID: 5004591075865479049}
   mouseSensitivity: 1
   maxLookAngle: 85
+  cardLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &8409985031196241163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,7 +390,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   ShowTopMostFoldoutHeaderGroup: 1
   handList: []
-  handSpawnPoint: {fileID: 5491652992900956012}
   cardPrefab: {fileID: 4407431205922775172, guid: b007b655a9cdf6241916b2e30dbce611, type: 3}
   cardSpacing: 1
 --- !u!1 &5117417071643562219

@@ -15,8 +15,7 @@ namespace PlayerScripts
 
         List<GameObject> cardObjects = new List<GameObject>();
 
-
-        public void DrawCard()
+        public void DrawCard(ulong playerID)
         {
             CardScriptables card = DeckManager.Instance.DrawCard();
             handList.Add(card);
@@ -25,7 +24,7 @@ namespace PlayerScripts
             cardObjects.Add(cardObject);
 
             NetworkObject cardNetworkObject = cardObject.GetComponent<NetworkObject>();
-            cardNetworkObject.Spawn();
+            cardNetworkObject.SpawnWithOwnership(playerID);
             cardNetworkObject.TrySetParent(transform);
 
             cardObject.GetComponent<Card>().SetCard(card.cardID);
@@ -33,6 +32,19 @@ namespace PlayerScripts
             UpdateHandLayout();
 
             Debug.Log($"Draw Card: {card.CardName()}");
+        }
+
+        public void DiscardCard(ulong cardNetworkId)
+        {
+            int index = cardObjects.FindIndex(c => c.GetComponent<NetworkObject>().NetworkObjectId == cardNetworkId);
+            if (index < 0 || index >= handList.Count) return;
+            CardScriptables cardToDiscard = handList[index];
+            handList.RemoveAt(index);
+            GameObject cardObject = cardObjects[index];
+            cardObjects.RemoveAt(index);
+            Destroy(cardObject);
+            UpdateHandLayout();
+            Debug.Log($"Discard Card: {cardToDiscard.CardName()}");
         }
 
         private void UpdateHandLayout()

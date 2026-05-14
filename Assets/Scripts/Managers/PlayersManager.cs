@@ -108,7 +108,7 @@ namespace Managers
 
             if (playerHand != null)
             {
-                playerHand.DrawCard();
+                playerHand.DrawCard(m_Players[playerIndex].OwnerClientId);
             }
         }
 
@@ -144,6 +144,21 @@ namespace Managers
             {
                 // Update the player's transform on the server
                 player.transform.Rotate(Vector3.up, rotation);
+            }
+        }
+
+        [Rpc(SendTo.Server)]
+        public void RequestCardActionRpc(ulong clientId, ulong cardNetworkId)
+        {
+            int index = m_Players.FindIndex(p => p != null && p.OwnerClientId == clientId);
+            Player player = m_Players[index];
+            if (player != null && player.OwnerClientId == clientId)
+            {
+                PlayerHand playerHand = GetPlayerHand(index);
+                if (playerHand != null)
+                {
+                    playerHand.DiscardCard(cardNetworkId);
+                }
             }
         }
 

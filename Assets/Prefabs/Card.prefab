@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4127589167282299166}
   - component: {fileID: 2085172278684944582}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Card Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 816532908554440599}
   - component: {fileID: 8756487288857045752}
   - component: {fileID: 6238393183418025262}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5272452471706973773}
   - component: {fileID: 3307409578719125809}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Card Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
