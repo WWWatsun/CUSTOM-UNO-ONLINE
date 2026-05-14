@@ -8,10 +8,10 @@ namespace PlayerScripts
     [RequireComponent(typeof(PlayerController))]
     public class Player : NetworkBehaviour
     {
-        public int playerID;  // playerID = -1 -> auto assign, playerID >= 0 -> 3 assigned by GameManager
-
         [SerializeField] private PlayerVisual playerVisual;
+        [SerializeField] private SpriteRenderer playerFace;
         private PlayerController playerController;
+        private int playerIndex;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -27,12 +27,21 @@ namespace PlayerScripts
 
         public override void OnNetworkSpawn()
         {
-
+            if (IsOwner)
+            {
+                playerFace.enabled = false;
+            }
         }
 
-        public int GetPlayerID()
+        public int GetPlayerIndex()
         {
-            return playerID;
+            return playerIndex;
+        }
+
+        public int SetPlayerIndex(int index)
+        {
+            playerIndex = index;
+            return playerIndex;
         }
 
         public void SetPlayerTurn(bool isCurrentTurn)

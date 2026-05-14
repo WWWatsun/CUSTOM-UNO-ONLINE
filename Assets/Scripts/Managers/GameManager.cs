@@ -21,6 +21,8 @@ namespace Managers
         [Header("Game Settings")]
         public int startingCard { get; private set; } = 7;
 
+        private int currentPenalty = 0;
+
         private void Awake()
         {
             if (Instance == null)
@@ -47,6 +49,26 @@ namespace Managers
 
             OnStartGame?.Invoke();
             //DealingOnStart();
+        }
+
+        public bool IsLegalMove(Player player, CardScriptables card)
+        {
+            if (!IsServer) return false; // Only the server should validate moves
+
+            if (player == null || card == null) return false;
+
+            if (player.GetPlayerIndex() != TurnManager.Instance.GetCurrentPlayerIndex())
+            {
+                return false;
+            }
+
+            return UnoRuleEngine.IsLegalMove(
+                playedCard: card,
+                topCard: DeckManager.Instance.GetTopDiscardPileCard(),
+                currentColor: DeckManager.Instance.GetTopDiscardPileCard().cardColor,
+                playerCardCount: PlayersManager.Instance.GetPlayerCardCount(player.GetPlayerIndex()),
+                pendingPenalty: currentPenalty
+            );
         }
 
         private void SpawnTable()

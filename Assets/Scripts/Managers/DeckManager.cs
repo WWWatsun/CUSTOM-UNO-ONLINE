@@ -46,11 +46,11 @@ namespace Managers
             base.OnNetworkSpawn();
             if (IsServer)
             {
-                InitDiscardPileDisplay();
+                InitDiscardPile();
             }
         }
 
-        private void InitDiscardPileDisplay()
+        private void InitDiscardPile()
         {
             if (!IsServer) return;
 
@@ -58,6 +58,9 @@ namespace Managers
             NetworkObject discardPileDisplayNetworkObject = discardPileDisplay.GetComponent<NetworkObject>();
             discardPileDisplayNetworkObject.Spawn();
             discardPileDisplayNetworkObject.TrySetParent(discardPilePosition);
+
+            discardPile.Add(DrawCard());
+            discardPileDisplay.GetComponent<Card>().SetCard(discardPile[0].cardID);
 
             discardPileDisplay.transform.localScale = Vector3.one * 0.5f;
         }
@@ -103,6 +106,15 @@ namespace Managers
             discardPile.Add(card);
 
             discardPileDisplay.GetComponent<Card>().SetCard(card.cardID);
+        }
+
+        public CardScriptables GetTopDiscardPileCard()
+        {
+            if (discardPile.Count == 0)
+            {
+                return null;
+            }
+            return discardPile[discardPile.Count - 1];
         }
 
         public CardScriptables GetCardData(int cardID)

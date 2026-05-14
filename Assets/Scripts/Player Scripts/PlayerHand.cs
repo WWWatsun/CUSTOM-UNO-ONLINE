@@ -38,6 +38,7 @@ namespace PlayerScripts
             if (index < 0 || index >= handList.Count) return;
 
             CardScriptables cardToDiscard = handList[index];
+
             handList.RemoveAt(index);
             GameObject cardObject = cardObjects[index];
             cardObjects.RemoveAt(index);
@@ -47,6 +48,24 @@ namespace PlayerScripts
             DeckManager.Instance.GetDiscarded(cardToDiscard);
 
             Debug.Log($"Discard Card: {cardToDiscard.CardName()}");
+        }
+
+        public int GetCardCount()
+        {
+            return handList.Count;
+        }
+
+        public CardScriptables GetCardAtIndex(int index)
+        {
+            if (index < 0 || index >= handList.Count) return null;
+            return handList[index];
+        }
+
+        public CardScriptables GetCardByNetworkID(ulong networkID)
+        {
+            int index = cardObjects.FindIndex(c => c.GetComponent<NetworkObject>().NetworkObjectId == networkID);
+            if (index < 0 || index >= handList.Count) return null;
+            return handList[index];
         }
 
         private void UpdateHandLayout()

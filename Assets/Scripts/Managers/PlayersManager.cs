@@ -75,6 +75,7 @@ namespace Managers
 
             m_Players[m_PlayersCount] = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<Player>();
             Player player = m_Players[m_PlayersCount];
+            player.SetPlayerIndex(m_PlayersCount);
             Transform newTransform = GetPlayerSpawnPoint(m_PlayersCount);
 
             if (IsServer && player != null)
@@ -157,7 +158,12 @@ namespace Managers
                 PlayerHand playerHand = GetPlayerHand(index);
                 if (playerHand != null)
                 {
-                    playerHand.DiscardCard(cardNetworkId);
+                    CardScriptables card = playerHand.GetCardByNetworkID(cardNetworkId);
+                    if (GameManager.Instance.IsLegalMove(player, card))
+                    {
+                        playerHand.DiscardCard(cardNetworkId);
+                        TurnManager.Instance.MoveToNextPlayer();
+                    }
                 }
             }
         }
@@ -177,6 +183,12 @@ namespace Managers
         public int GetPlayerCount()
         {
             return m_PlayersCount;
+        }
+
+        public int GetPlayerCardCount(int playerIndex)
+        {
+            PlayerHand playerHand = GetPlayerHand(playerIndex);
+            return playerHand != null ? playerHand.GetCardCount() : 0;
         }
 
         private Transform GetPlayerSpawnPoint(int playerIndex)

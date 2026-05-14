@@ -34,6 +34,11 @@ namespace Managers
             PlayersManager.Instance.BroadcastPlayerTurn(currentPlayerIndex.Value);
         }
 
+        public int GetCurrentPlayerIndex()
+        {
+            return currentPlayerIndex.Value;
+        }
+
         public void MoveToNextPlayer()
         {
             if (!IsServer) return;
