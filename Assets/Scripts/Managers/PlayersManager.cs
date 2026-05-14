@@ -101,7 +101,7 @@ namespace Managers
             }
         }
 
-        private void DealCardToPlayer(int playerIndex)
+        public void DealCardToPlayer(int playerIndex)
         {
             if (!IsServer) return;
 
@@ -113,7 +113,7 @@ namespace Managers
             }
         }
 
-        private PlayerHand GetPlayerHand(int playerIndex)
+        public PlayerHand GetPlayerHand(int playerIndex)
         {
             return playerIndex switch
             {
@@ -158,12 +158,7 @@ namespace Managers
                 PlayerHand playerHand = GetPlayerHand(index);
                 if (playerHand != null)
                 {
-                    CardScriptables card = playerHand.GetCardByNetworkID(cardNetworkId);
-                    if (GameManager.Instance.IsLegalMove(player, card))
-                    {
-                        playerHand.DiscardCard(cardNetworkId);
-                        TurnManager.Instance.MoveToNextPlayer();
-                    }
+                    GameManager.Instance.TryPlayCard(player, cardNetworkId);
                 }
             }
         }

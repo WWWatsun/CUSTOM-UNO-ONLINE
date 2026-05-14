@@ -45,8 +45,6 @@ namespace PlayerScripts
             Destroy(cardObject);
             UpdateHandLayout();
 
-            DeckManager.Instance.GetDiscarded(cardToDiscard);
-
             Debug.Log($"Discard Card: {cardToDiscard.CardName()}");
         }
 

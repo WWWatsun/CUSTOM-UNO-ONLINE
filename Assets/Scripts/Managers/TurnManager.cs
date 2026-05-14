@@ -1,6 +1,7 @@
+using PlayerScripts;
 using System;
-using UnityEngine;
 using Unity.Netcode;
+using UnityEngine;
 
 namespace Managers
 {
@@ -12,6 +13,12 @@ namespace Managers
         NetworkVariable<int> currentPlayerIndex = new NetworkVariable<int>();
         int direction = 1;
         int playerCount;
+
+        // Biến lưu tạm lá Wild/+4 đang chờ người chơi chọn màu
+        private CardScriptables pendingWildCard;
+
+        // Biến dùng để ghi nhớ người chốt chuỗi +4
+        private Player lastPlus4Player = null;
 
         private void Awake()
         {
@@ -48,6 +55,11 @@ namespace Managers
 
             // Tell the PlayersManager to broadcast the turn to everyone
             PlayersManager.Instance.BroadcastPlayerTurn(currentPlayerIndex.Value);
+        }
+
+        public void ReverseDirection()
+        {
+            direction *= -1;
         }
     }
 }

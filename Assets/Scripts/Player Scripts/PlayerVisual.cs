@@ -23,7 +23,7 @@ namespace PlayerScripts
             // Implement visual changes to indicate the player's turn
             if (isCurrentTurn)
             {
-                transform.localScale = Vector3.one * 1.2f; // Enlarge the player to indicate it's their turn
+                transform.localScale = Vector3.one * 1.5f; // Enlarge the player to indicate it's their turn
             }
             else
             {

@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (NetworkManager.Singleton.ConnectedClients.Count >= 2)
+        if (NetworkManager.Singleton.IsServer && NetworkManager.Singleton.ConnectedClients.Count >= 2)
         {
             startGameButton.gameObject.SetActive(true); // Show the start game button when at least 2 players are connected
         }
