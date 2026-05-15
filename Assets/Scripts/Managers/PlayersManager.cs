@@ -115,9 +115,54 @@ namespace Managers
             }
         }
 
+<<<<<<< Updated upstream
         // UPDATED METHOD: The server broadcasts this, and all clients execute it
         [ClientRpc]
         public void SetPlayerTurnClientRpc(ulong activePlayerNetworkId, ClientRpcParams clientRpcParams = default)
+=======
+        [Rpc(SendTo.Server)]
+        public void UpdatePlayerLookInputRpc(ulong clientId, float rotation)
+        {
+            Player player = m_Players.FirstOrDefault(p => p != null && p.OwnerClientId == clientId);
+            if (player != null)
+            {
+                // Update the player's transform on the server
+                player.transform.Rotate(Vector3.up, rotation);
+            }
+        }
+
+        [Rpc(SendTo.Server)]
+        public void RequestCardActionRpc(ulong clientId, ulong cardNetworkId)
+        {
+            int index = m_Players.FindIndex(p => p != null && p.OwnerClientId == clientId);
+            Player player = m_Players[index];
+            if (player != null && player.OwnerClientId == clientId)
+            {
+                PlayerHand playerHand = GetPlayerHand(index);
+                if (playerHand != null)
+                {
+                    GameManager.Instance.TryPlayCard(player, cardNetworkId);
+                }
+            }
+        }
+
+        [Rpc(SendTo.Server)]
+        public void RequestCardDrawRpc(ulong clientId)
+        {
+            int index = m_Players.FindIndex(p => p != null && p.OwnerClientId == clientId);
+            Player player = m_Players[index];
+            if (player != null && player.OwnerClientId == clientId)
+            {
+                if (player.GetPlayerIndex() == TurnManager.Instance.GetCurrentPlayerIndex())
+                {
+                    DealCardToPlayer(player.GetPlayerIndex());
+                }
+            }
+        }
+
+        [Rpc(SendTo.ClientsAndHost)]
+        public void SetPlayerTurnRpc(ulong activePlayerNetworkId)
+>>>>>>> Stashed changes
         {
             // Because clients don't have the m_Players list, we just find all Player objects in the scene
             Player[] allPlayers = FindObjectsByType<Player>(FindObjectsSortMode.None);
@@ -130,6 +175,30 @@ namespace Managers
             }
         }
 
+<<<<<<< Updated upstream
+=======
+        public Player GetPlayer(int index)
+        {
+            return m_Players[index];
+        }
+
+        public int GetPlayerIndexFromClientId(ulong clientId)
+        {
+            return m_Players.FindIndex(p => p != null && p.OwnerClientId == clientId);
+        }
+
+        public int GetPlayerCount()
+        {
+            return m_PlayersCount;
+        }
+
+        public int GetPlayerCardCount(int playerIndex)
+        {
+            PlayerHand playerHand = GetPlayerHand(playerIndex);
+            return playerHand != null ? playerHand.GetCardCount() : 0;
+        }
+
+>>>>>>> Stashed changes
         private Transform GetPlayerSpawnPoint(int playerIndex)
         {
             return playerIndex switch

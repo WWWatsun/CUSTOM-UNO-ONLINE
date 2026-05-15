@@ -72,6 +72,40 @@ namespace PlayerScripts
             isPlaying = isCurrentTurn; // Update the flag based on whether it's the player's turn
             //playerCamera.Priority = isCurrentTurn ? 20 : 10; // Set camera priority to switch between players
         }
+<<<<<<< Updated upstream
+=======
+
+        private void FireRaycast()
+        {
+            Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * 100f, Color.red, 1f);
+
+            Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+            if (Physics.Raycast(ray, out RaycastHit hit, 100f, cardLayer))
+            {
+                NetworkObject hitObject = hit.collider.GetComponent<NetworkObject>();
+
+                if (hitObject != null)
+                {
+                    Debug.Log($"hit object {hitObject.NetworkObjectId}, {DeckManager.Instance.IsDrawPile(hitObject.NetworkObjectId)}");
+                    if (DeckManager.Instance.IsDrawPile(hitObject.NetworkObjectId))
+                    {
+                        Debug.Log("Request a drawing card");
+                        PlayersManager.Instance.RequestCardDrawRpc(NetworkManager.Singleton.LocalClientId);
+                    }
+                    // Check if THIS player owns the card they clicked
+                    else if (hitObject.IsOwner)
+                    {
+                        Debug.Log("Hit my card! Requesting deletion...");
+                        PlayersManager.Instance.RequestCardActionRpc(NetworkManager.Singleton.LocalClientId, hitObject.NetworkObjectId);
+                    }
+                    else
+                    {
+                        Debug.Log("That's not your card!");
+                    }
+                }
+            }
+        }
+>>>>>>> Stashed changes
     }
 }
 
