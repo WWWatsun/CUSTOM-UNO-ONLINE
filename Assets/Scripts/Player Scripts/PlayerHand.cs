@@ -53,6 +53,11 @@ namespace PlayerScripts
             return handList.Count;
         }
 
+        public List<CardScriptables> HandList
+        {
+            get { return handList; }
+            set { handList = value; }
+        }
         public CardScriptables GetCardAtIndex(int index)
         {
             if (index < 0 || index >= handList.Count) return null;
@@ -64,6 +69,25 @@ namespace PlayerScripts
             int index = cardObjects.FindIndex(c => c.GetComponent<NetworkObject>().NetworkObjectId == networkID);
             if (index < 0 || index >= handList.Count) return null;
             return handList[index];
+        }
+
+        public void UpdateSwappedHand(ulong ownerId)
+        {
+            foreach (var obj in cardObjects) Destroy(obj);
+            cardObjects.Clear();
+
+            foreach(CardScriptables card in handList)
+            {
+                GameObject cardObject = Instantiate(cardPrefab, transform.position, transform.rotation);
+                cardObjects.Add(cardObject);
+
+                NetworkObject cardNetworkObject = cardObject.GetComponent<NetworkObject>();
+                cardNetworkObject.SpawnWithOwnership(ownerId);
+                cardNetworkObject.TrySetParent(transform);
+
+                cardObject.GetComponent<Card>().SetCard(card.cardID);
+            }
+            UpdateHandLayout();
         }
 
         private void UpdateHandLayout()

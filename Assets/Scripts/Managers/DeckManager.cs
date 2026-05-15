@@ -17,8 +17,11 @@ namespace Managers
         [Header("References")]
         [SerializeField] private GameObject cardPrefab;
         [SerializeField] private Transform discardPilePosition;
+        [SerializeField] private Transform drawPilePosition;
 
         private GameObject discardPileDisplay;
+        private GameObject drawPileDisplay;
+        NetworkVariable<ulong> drawpileNetwordId = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
         private void Awake()
         {
@@ -47,6 +50,7 @@ namespace Managers
             if (IsServer)
             {
                 InitDiscardPile();
+                InitDrawPile();
             }
         }
 
@@ -63,6 +67,22 @@ namespace Managers
             discardPileDisplay.GetComponent<Card>().SetCard(discardPile[0].cardID);
 
             discardPileDisplay.transform.localScale = Vector3.one * 0.5f;
+        }
+
+        private void InitDrawPile()
+        {
+            if (!IsServer) return;
+            drawPileDisplay = Instantiate(cardPrefab, drawPilePosition.position, drawPilePosition.rotation);
+            NetworkObject drawDisplayNetworkObject = drawPileDisplay.GetComponent<NetworkObject>();
+            drawDisplayNetworkObject.Spawn();
+            drawDisplayNetworkObject.TrySetParent(drawPilePosition);
+            drawPileDisplay.transform.localScale = Vector3.one * 0.5f;
+            drawpileNetwordId.Value = drawDisplayNetworkObject.NetworkObjectId;
+        }
+
+        public bool IsDrawPile(ulong pileId)
+        {
+            return drawpileNetwordId.Value == pileId;
         }
 
         public void Shuffle()

@@ -125,6 +125,16 @@ namespace Managers
             };
         }
 
+        public Player GetPlayer(int playerIndex)
+        {
+            return m_Players[playerIndex];
+        }
+
+        public int GetPlayerIndexFromClientId(ulong clientId)
+        {
+            return m_Players.FindIndex(p => p != null && p.OwnerClientId == clientId);
+        }
+
         public void BroadcastPlayerTurn(int playerIndex)
         {
             if (!IsServer) return;
@@ -159,6 +169,20 @@ namespace Managers
                 if (playerHand != null)
                 {
                     GameManager.Instance.TryPlayCard(player, cardNetworkId);
+                }
+            }
+        }
+
+        [Rpc(SendTo.Server)]
+        public void RequestCardDrawRpc(ulong clientId)
+        {
+            int index = m_Players.FindIndex(p => p != null && p.OwnerClientId == clientId);
+            Player player = m_Players[index];
+            if (player != null && player.OwnerClientId == clientId)
+            {
+                if (player.GetPlayerIndex() == TurnManager.Instance.GetCurrentPlayerIndex())
+                {
+                    DealCardToPlayer(player.GetPlayerIndex());
                 }
             }
         }

@@ -98,7 +98,11 @@ namespace PlayerScripts
                 if (hitObject != null)
                 {
                     // Check if THIS player owns the card they clicked
-                    if (hitObject.IsOwner)
+                    if (DeckManager.Instance.IsDrawPile(hitObject.NetworkObjectId))
+                    {
+                        PlayersManager.Instance.RequestCardDrawRpc(NetworkManager.Singleton.LocalClientId);
+                    }
+                    else if (hitObject.IsOwner)
                     {
                         Debug.Log("Hit my card! Requesting deletion...");
                         PlayersManager.Instance.RequestCardActionRpc(NetworkManager.Singleton.LocalClientId, hitObject.NetworkObjectId);
