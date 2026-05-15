@@ -10,9 +10,6 @@ public class DeckManager : MonoBehaviour
     [SerializeField] List<CardScriptables> discardPile = new List<CardScriptables>();
     private void Awake()
     {
-<<<<<<< Updated upstream
-        if (Instance != null && Instance != this)
-=======
         public static DeckManager Instance { get; private set; }
 
         [Header("Deck Settings")]
@@ -30,7 +27,6 @@ public class DeckManager : MonoBehaviour
         NetworkVariable<ulong> drawpileNetwordId = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
         private void Awake()
->>>>>>> Stashed changes
         {
             Destroy(this.gameObject);
         }
@@ -51,13 +47,6 @@ public class DeckManager : MonoBehaviour
         //Iterate from last card, switch with random card
         while (n > 0)
         {
-<<<<<<< Updated upstream
-            int k = Random.Range(0, n);
-            CardScriptables card = activeDeck[k];
-            activeDeck[k] = activeDeck[n];
-            activeDeck[n] = card;
-            n--;
-=======
             base.OnNetworkSpawn();
             if (IsServer)
             {
@@ -157,7 +146,6 @@ public class DeckManager : MonoBehaviour
                 return null;
             }
             return cardDeck[cardID];
->>>>>>> Stashed changes
         }
     }
 

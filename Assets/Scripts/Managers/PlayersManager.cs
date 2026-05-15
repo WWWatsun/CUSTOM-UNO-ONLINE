@@ -115,11 +115,6 @@ namespace Managers
             }
         }
 
-<<<<<<< Updated upstream
-        // UPDATED METHOD: The server broadcasts this, and all clients execute it
-        [ClientRpc]
-        public void SetPlayerTurnClientRpc(ulong activePlayerNetworkId, ClientRpcParams clientRpcParams = default)
-=======
         [Rpc(SendTo.Server)]
         public void UpdatePlayerLookInputRpc(ulong clientId, float rotation)
         {
@@ -162,7 +157,6 @@ namespace Managers
 
         [Rpc(SendTo.ClientsAndHost)]
         public void SetPlayerTurnRpc(ulong activePlayerNetworkId)
->>>>>>> Stashed changes
         {
             // Because clients don't have the m_Players list, we just find all Player objects in the scene
             Player[] allPlayers = FindObjectsByType<Player>(FindObjectsSortMode.None);
@@ -175,8 +169,6 @@ namespace Managers
             }
         }
 
-<<<<<<< Updated upstream
-=======
         public Player GetPlayer(int index)
         {
             return m_Players[index];
@@ -198,7 +190,6 @@ namespace Managers
             return playerHand != null ? playerHand.GetCardCount() : 0;
         }
 
->>>>>>> Stashed changes
         private Transform GetPlayerSpawnPoint(int playerIndex)
         {
             return playerIndex switch

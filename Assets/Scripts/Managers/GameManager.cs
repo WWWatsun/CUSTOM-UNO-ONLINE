@@ -64,13 +64,6 @@ namespace Managers
             PlayerHand[] players = FindObjectsByType<PlayerHand>(FindObjectsSortMode.None);
             for (int i=0; i<startingCard; i++)
             {
-<<<<<<< Updated upstream
-                foreach(PlayerHand p in players)
-                {
-                    Debug.Log($"Deal card number {i+1}");
-                    p.DrawCard();
-                }
-=======
                 return false;
             }
 
@@ -312,7 +305,6 @@ namespace Managers
             if (tableNetworkObject != null)
             {
                 tableNetworkObject.Spawn(); // This is the magic word!
->>>>>>> Stashed changes
             }
         }
     }
