@@ -47,15 +47,32 @@ namespace PlayerScripts
             {
                 playerInput.enabled = true; // Enable input for the owning player
                 playerCamera.Priority = 20; // Set camera priority to ensure the owning player's camera is active
+
+                Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
+                Cursor.visible = false; // Hide the cursor
             }
 
             base.OnNetworkSpawn();
         }
 
-        public void OnAttack(InputValue context)
+        private void OnApplicationFocus(bool hasFocus)
         {
-            if (!isPlaying) return; // Ignore input if the game hasn't started
-            
+            // Safety check: We only want the local player's machine to mess with its own cursor
+            if (!IsOwner) return;
+
+            if (hasFocus)
+            {
+                // The game window just regained focus, so re-lock the mouse!
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+
+        public void OnInteract(InputValue context)
+        {
+            // Block interaction if it's not your turn OR if you are currently using the mouse for UI
+            if (!isPlaying || Cursor.lockState != CursorLockMode.Locked) return;
+
             if (context.isPressed)
             {
                 FireRaycast();
@@ -64,12 +81,38 @@ namespace PlayerScripts
 
         public void OnLook(InputValue context)
         {
-            if (!isPlaying) return; // Ignore input if the game hasn't started
+            // Block looking if it's not your turn OR if you are currently using the mouse for UI
+            if (!isPlaying || Cursor.lockState != CursorLockMode.Locked)
+            {
+                lookInput = Vector2.zero; // Stop camera drift immediately
+                return;
+            }
+
             lookInput = context.Get<Vector2>();
+        }
+
+        public void OnShowCursor(InputValue context)
+        {
+            if (!IsOwner) return;
+
+            if (context.isPressed)
+            {
+                Cursor.lockState = CursorLockMode.None; // Unlock the cursor
+                Cursor.visible = true; // Show the cursor
+                lookInput = Vector2.zero; // Instantly kill any current camera movement
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
+                Cursor.visible = false; // Hide the cursor
+            }
         }
 
         private void HandleLook()
         {
+            // Safety net: Do not apply any rotations if the cursor is currently unlocked
+            if (Cursor.lockState != CursorLockMode.Locked) return;
+
             float mouseX = lookInput.x * mouseSensitivity;
             float mouseY = lookInput.y * mouseSensitivity;
 

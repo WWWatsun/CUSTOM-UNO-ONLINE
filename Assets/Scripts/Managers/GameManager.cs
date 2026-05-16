@@ -18,14 +18,14 @@ namespace Managers
         [Header("Environment Settings")]
         [SerializeField] GameObject tablePrefab;
         [SerializeField] Transform tableSpawnPosition;
+        [SerializeField] GameObject crownPrefab;
+        [SerializeField] Camera mainCamera;
 
         [Header("Game Settings")]
         public int startingCard { get; private set; } = 7;
 
-        private Player lastPlus4Player = null; // Biến để lưu người chơi đã đánh lá +4 cuối cùng
-
         private int currentPenalty = 0;
-        private CardColor currentColor = CardColor.RED; // Mặc định màu đỏ khi bắt đầu
+        NetworkVariable<CardColor> currentColor = new NetworkVariable<CardColor>();
 
         [Header("Rule 8")]
         private List<int> rule8Clickers = new List<int>();
@@ -48,6 +48,9 @@ namespace Managers
             {
                 SpawnTable();
             }
+            currentColor.OnValueChanged += OncurrentColorChanged;
+
+            SetCameraColor(currentColor.Value); // Ensure camera starts with the correct color
         }
 
         public void StartGame()
@@ -72,7 +75,7 @@ namespace Managers
             return UnoRuleEngine.IsLegalMove(
                 playedCard: card,
                 topCard: DeckManager.Instance.GetTopDiscardPileCard(),
-                currentColor: DeckManager.Instance.GetTopDiscardPileCard().cardColor,
+                currentColor: currentColor.Value,
                 playerCardCount: PlayersManager.Instance.GetPlayerCardCount(player.GetPlayerIndex()),
                 pendingPenalty: currentPenalty
             );
@@ -94,13 +97,19 @@ namespace Managers
             // 1. KIỂM TRA NGƯỜI VỪA ĐÁNH CÓ HẾT BÀI CHƯA
             if (playerHand.GetCardCount() == 0)
             {
-                Debug.Log($"Player {player.GetPlayerIndex()} đã đánh hết bài!");
-                //CheckGameEndCondition(); // Gọi hàm kiểm tra kết thúc
+                if (IsServer)
+                {
+                    // Spawn crown prefab above the player who has no cards left
+                    SpawnCrown(player);
+
+                    Debug.Log($"Player {player.GetPlayerIndex()} đã đánh hết bài!");
+                    return; // Game should end, so skip the rest of the logic
+                }
             }
 
             if (card.cardColor != CardColor.NEUTRAL)
             {
-                currentColor = card.cardColor;
+                currentColor.Value = card.cardColor;
             }
 
             Debug.Log($"Player {player.GetPlayerIndex()} played {card.CardName()}");
@@ -110,28 +119,54 @@ namespace Managers
             {
                 if (card.cardValue == CardValue.PLUS4)
                 {
-                    // LÁ +4: Ghi nhận người đánh cuối cùng, cộng dồn phạt, NHƯNG CHƯA BẬT UI CHỌN MÀU
-                    lastPlus4Player = player;
-                    ApplyBasicCardEffect(card, player);
+                    currentPenalty += 4;
                 }
-                else
-                {
-                    // LÁ WILD THƯỜNG: Dừng lượt, bật UI chọn màu ngay lập tức
-                    UIManager.Instance.ShowColorPickerUIRpc(player.NetworkObjectId);
-                }
+                UIManager.Instance.ShowColorPickerUIRpc(player.NetworkObjectId);
             }
             else
             {
                 // NẾU ĐÁNH LÁ BÌNH THƯỜNG (Hoặc +2)
-                currentColor = card.cardColor;
+                currentColor.Value = card.cardColor;
                 ApplyBasicCardEffect(card, player);
             }
+        }
+
+        public void TryDrawCard(Player player)
+        {
+            if (player == null) return;
+
+            if (player.GetPlayerIndex() != TurnManager.Instance.GetCurrentPlayerIndex())
+            {
+                Debug.LogWarning("Not your turn!");
+                return;
+            }
+
+            // FIX: Process penalty first, skipping normal draw logic
+            if (currentPenalty > 0)
+            {
+                AcceptDrawPenalty(player);
+                return;
+            }
+
+            // Base Uno Draw Logic
+            CardScriptables drawnCard = DeckManager.Instance.DrawCard();
+            PlayersManager.Instance.DealCardToPlayer(player.GetPlayerIndex(), drawnCard);
+
+            if (IsLegalMove(player, drawnCard))
+            {
+                Debug.Log("Drawn card is playable. Player retains turn decision.");
+                return;
+            }
+
+            // Not playable? Advance turn cleanly
+            TurnManager.Instance.MoveToNextPlayer();
         }
 
         public void SetCurrentColor(CardColor color)
         {
             if (!IsServer) return;
-            currentColor = color;
+            currentColor.Value = color;
+            SetCameraColor(color);
             Debug.Log($"Current color set to {currentColor}");
         }
 
@@ -140,7 +175,9 @@ namespace Managers
         {
             //RED:0, BLUE:1, GREEN:2, YELLOW:3
             SetCurrentColor((CardColor)color);
-            UIManager.Instance.TurnOffUIClientRpc();
+            UIManager.Instance.TurnOffUIRpc();
+
+            // Once the color is safely locked in on the server, hand over the turn
             TurnManager.Instance.MoveToNextPlayer();
         }
 
@@ -150,6 +187,7 @@ namespace Managers
             {
                 case CardValue.REVERSE:
                     TurnManager.Instance.ReverseDirection();
+                    TurnManager.Instance.MoveToNextPlayer(); // FIX: Pass the turn in the new direction!
                     break;
 
                 case CardValue.SKIP:
@@ -160,33 +198,27 @@ namespace Managers
                 // --- CẬP NHẬT LUẬT STACKING (4.5) ---
                 case CardValue.PLUS2:
                     currentPenalty += 2;
+                    TurnManager.Instance.MoveToNextPlayer(); // FIX: Pass the penalty threat to the next player!
                     break;
 
                 case CardValue.PLUS4:
                     currentPenalty += 4;
+                    TurnManager.Instance.MoveToNextPlayer();
                     break;
 
                 // --- CUSTOM RULES HOOKS (4.1, 4.2, 4.3) ---
                 case CardValue.ZERO:
                     Debug.Log("Rule of 0: Trigger UI to choose Direction.");
-                    // TODO: Dừng turn logic ở đây, hiển thị UI chọn chiều. 
-                    // Sau khi user chọn, gọi hàm ExecuteRule0(int direction)
-                    //panelRule0.SetActive(true);
                     UIManager.Instance.ShowRule0UIRpc(player.NetworkObjectId);
                     break;
 
                 case CardValue.SEVEN:
                     Debug.Log("Rule of 7: Trigger UI to choose Target Player.");
-                    // TODO: Dừng turn, hiển thị UI chọn mục tiêu.
-                    // Sau khi chọn, gọi hàm ExecuteRule7(PlayerController target)
-                    //panelRule7.SetActive(true);
-                    //ShowRule7UI(turnManager.CurrentPlayerIndex);
                     UIManager.Instance.ShowRule7UIRpc(player.NetworkObjectId);
                     break;
 
                 case CardValue.EIGHT:
                     Debug.Log("Rule of 8: Trigger Reaction Event!");
-                    //StartCoroutine(Rule8ReactionEventRoutine());
                     UIManager.Instance.ShowRule8UIRpc(player.NetworkObjectId);
                     StartCoroutine(Rule8ReactionEventRoutine());
                     break;
@@ -206,7 +238,7 @@ namespace Managers
             List<CardScriptables>[] hands = new List<CardScriptables>[count];
             for (int i = 0; i < count; i++)
             {
-                hands[i] = PlayersManager.Instance.GetPlayerHand(i).HandList;
+                hands[i] = new List<CardScriptables>(PlayersManager.Instance.GetPlayerHand(i).HandList);
             }
 
             for (int i = 0; i < count; i++)
@@ -214,10 +246,10 @@ namespace Managers
                 int destinationIndex = (i + direction + count) % count;
                 PlayerHand destinationHand = PlayersManager.Instance.GetPlayerHand(destinationIndex);
                 destinationHand.HandList = hands[i];
-                destinationHand.UpdateSwappedHand(PlayersManager.Instance.GetPlayerHand(destinationIndex).OwnerClientId);
+                destinationHand.UpdateSwappedHand(PlayersManager.Instance.GetPlayer(destinationIndex).OwnerClientId);
             }
 
-            UIManager.Instance.TurnOffUIClientRpc();
+            UIManager.Instance.TurnOffUIRpc();
             TurnManager.Instance.MoveToNextPlayer();
         }
 
@@ -233,13 +265,17 @@ namespace Managers
             if (playerHand != null && targetHand != null)
             {
                 Debug.Log($"Swap Player {playerId} to Player {targetId}");
-                List<CardScriptables> playerHandList = playerHand.HandList;
-                List<CardScriptables> targetHandList = targetHand.HandList;
+
+                List<CardScriptables> playerHandList = new List<CardScriptables>(playerHand.HandList);
+                List<CardScriptables> targetHandList = new List<CardScriptables>(targetHand.HandList);
+
                 playerHand.HandList = targetHandList;
                 playerHand.UpdateSwappedHand(PlayersManager.Instance.GetPlayer(playerId).OwnerClientId);
+
                 targetHand.HandList = playerHandList;
                 targetHand.UpdateSwappedHand(PlayersManager.Instance.GetPlayer(targetId).OwnerClientId);
-                UIManager.Instance.TurnOffUIClientRpc();
+
+                UIManager.Instance.TurnOffUIRpc();
                 TurnManager.Instance.MoveToNextPlayer();
             }
         }
@@ -277,18 +313,18 @@ namespace Managers
                 //Each Non-clicker draw 2 cards
                 foreach (int i in nonClicker)
                 {
-                    PlayersManager.Instance.DealCardToPlayer(i);
-                    PlayersManager.Instance.DealCardToPlayer(i);
+                    PlayersManager.Instance.DealCardToPlayer(i, DeckManager.Instance.DrawCard());
+                    PlayersManager.Instance.DealCardToPlayer(i, DeckManager.Instance.DrawCard());
                 }
             }
             //If all clicked, last to click draw
             else
             {
                 int lastToClick = rule8Clickers[rule8Clickers.Count - 1];
-                PlayersManager.Instance.DealCardToPlayer(lastToClick);
-                PlayersManager.Instance.DealCardToPlayer(lastToClick);
+                PlayersManager.Instance.DealCardToPlayer(lastToClick, DeckManager.Instance.DrawCard());
+                PlayersManager.Instance.DealCardToPlayer(lastToClick, DeckManager.Instance.DrawCard());
             }
-            UIManager.Instance.TurnOffUIClientRpc();
+            UIManager.Instance.TurnOffUIRpc();
             TurnManager.Instance.MoveToNextPlayer();
         }
 
@@ -302,6 +338,57 @@ namespace Managers
             if (tableNetworkObject != null)
             {
                 tableNetworkObject.Spawn(); // This is the magic word!
+            }
+        }
+
+        private void SpawnCrown(Player player)
+        {
+            GameObject crown = Instantiate(crownPrefab, player.transform.position + Vector3.up, Quaternion.Euler(-90, 0, 0));
+            NetworkObject crownNetworkObject = crown.GetComponent<NetworkObject>();
+            if (crownNetworkObject != null)
+            {
+                crownNetworkObject.Spawn();
+                crownNetworkObject.TrySetParent(player.NetworkObject, true);
+            }
+        }
+
+        private void AcceptDrawPenalty(Player player)
+        {
+            Debug.Log($"Player {player.GetPlayerIndex()} got {currentPenalty} cards and lost turn.");
+            for (int i = 0; i < currentPenalty; i++)
+            {
+                PlayersManager.Instance.DealCardToPlayer(player.GetPlayerIndex(), DeckManager.Instance.DrawCard());
+            }
+            currentPenalty = 0; // Reset penalty
+            TurnManager.Instance.MoveToNextPlayer();
+        }
+
+        private void OncurrentColorChanged(CardColor previoudColor, CardColor newColor)
+        {
+            SetCameraColor(newColor);
+        }
+
+        private void SetCameraColor(CardColor color)
+        {
+            if (mainCamera == null) return;
+
+            switch (color)
+            {
+                case CardColor.RED:
+                    mainCamera.backgroundColor = Color.red;
+                    break;
+                case CardColor.BLUE:
+                    mainCamera.backgroundColor = Color.blue;
+                    break;
+                case CardColor.GREEN:
+                    mainCamera.backgroundColor = Color.green;
+                    break;
+                case CardColor.YELLOW:
+                    mainCamera.backgroundColor = Color.yellow;
+                    break;
+                default:
+                    mainCamera.backgroundColor = Color.white;
+                    break;
             }
         }
     }

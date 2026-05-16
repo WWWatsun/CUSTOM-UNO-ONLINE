@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd851723890eb94e90a8cd310d1b8e4, type: 3}
   m_Name: Yellow Plus2
   m_EditorClassIdentifier: Assembly-CSharp::CardScriptables
+  cardID: 0
   cardValue: 12
   cardColor: 3
-  cardSprite: {fileID: -1351670045, guid: 316c6063836975744976f13b3708059b, type: 3}
+  cardSprite: {fileID: 21300000, guid: 08e3c07ae07c9a34084a22470d0965c3, type: 3}

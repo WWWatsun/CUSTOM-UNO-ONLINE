@@ -12,10 +12,14 @@ namespace PlayerScripts
         [SerializeField] float cardSpacing = 1f;
 
         List<GameObject> cardObjects = new List<GameObject>();
-
-        public void DrawCard(ulong playerID)
+        public List<CardScriptables> HandList
         {
-            CardScriptables card = DeckManager.Instance.DrawCard();
+            get { return handList; }
+            set { handList = value; }
+        }
+
+        public void DrawCard(ulong playerID, CardScriptables card)
+        {
             handList.Add(card);
 
             GameObject cardObject = Instantiate(cardPrefab, transform.position, transform.rotation);
@@ -42,7 +46,12 @@ namespace PlayerScripts
             handList.RemoveAt(index);
             GameObject cardObject = cardObjects[index];
             cardObjects.RemoveAt(index);
-            Destroy(cardObject);
+
+            if (cardObject.TryGetComponent<NetworkObject>(out var netObj) && netObj.IsSpawned)
+            {
+                netObj.Despawn();
+            }
+
             UpdateHandLayout();
 
             Debug.Log($"Discard Card: {cardToDiscard.CardName()}");
@@ -53,11 +62,6 @@ namespace PlayerScripts
             return handList.Count;
         }
 
-        public List<CardScriptables> HandList
-        {
-            get { return handList; }
-            set { handList = value; }
-        }
         public CardScriptables GetCardAtIndex(int index)
         {
             if (index < 0 || index >= handList.Count) return null;
@@ -73,7 +77,17 @@ namespace PlayerScripts
 
         public void UpdateSwappedHand(ulong ownerId)
         {
-            foreach (var obj in cardObjects) Destroy(obj);
+            foreach (var obj in cardObjects)
+            {
+                if (obj.TryGetComponent<NetworkObject>(out var netObj) && netObj.IsSpawned)
+                {
+                    netObj.Despawn(); // Automatically handles the network sync and destruction
+                }
+                else
+                {
+                    Destroy(obj);
+                }
+            }
             cardObjects.Clear();
 
             foreach(CardScriptables card in handList)
@@ -110,6 +124,7 @@ namespace PlayerScripts
                         transform.position.y,
                         transform.position.z
                     );
+                    cardObjects[i].transform.localScale = Vector3.one * 0.25f;
                 }
             }
             else if (transform.position.z == 0)
@@ -125,6 +140,7 @@ namespace PlayerScripts
                         transform.position.y,
                         target
                     );
+                    cardObjects[i].transform.localScale = Vector3.one * 0.25f;
                 }
             }
         }

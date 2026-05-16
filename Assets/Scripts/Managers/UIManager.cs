@@ -38,11 +38,15 @@ public class UIManager : NetworkBehaviour
         startHostButton.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartHost();
+            startHostButton.gameObject.SetActive(false);
+            startClientButton.gameObject.SetActive(false);
         });
 
         startClientButton.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartClient();
+            startHostButton.gameObject.SetActive(false);
+            startClientButton.gameObject.SetActive(false);
         });
     }
 
@@ -96,8 +100,8 @@ public class UIManager : NetworkBehaviour
         panelRule8.SetActive(true);
     }
 
-    [ClientRpc]
-    public void TurnOffUIClientRpc()
+    [Rpc(SendTo.ClientsAndHost)]
+    public void TurnOffUIRpc()
     {
         Player[] allPlayers = FindObjectsByType<Player>(FindObjectsSortMode.None);
         foreach (Player p in allPlayers)

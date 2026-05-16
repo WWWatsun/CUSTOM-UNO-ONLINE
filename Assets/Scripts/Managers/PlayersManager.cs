@@ -96,12 +96,13 @@ namespace Managers
             {
                 for (int j = 0; j < m_PlayersCount; j++)
                 {
-                    DealCardToPlayer(j);
+                    CardScriptables card = DeckManager.Instance.DrawCard();
+                    DealCardToPlayer(j, card);
                 }
             }
         }
 
-        public void DealCardToPlayer(int playerIndex)
+        public void DealCardToPlayer(int playerIndex, CardScriptables card)
         {
             if (!IsServer) return;
 
@@ -109,7 +110,7 @@ namespace Managers
 
             if (playerHand != null)
             {
-                playerHand.DrawCard(m_Players[playerIndex].OwnerClientId);
+                playerHand.DrawCard(m_Players[playerIndex].OwnerClientId, card);
             }
         }
 
@@ -182,7 +183,7 @@ namespace Managers
             {
                 if (player.GetPlayerIndex() == TurnManager.Instance.GetCurrentPlayerIndex())
                 {
-                    DealCardToPlayer(player.GetPlayerIndex());
+                    GameManager.Instance.TryDrawCard(player);
                 }
             }
         }

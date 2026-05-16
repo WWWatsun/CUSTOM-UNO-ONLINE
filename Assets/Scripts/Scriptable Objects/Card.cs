@@ -5,8 +5,10 @@ using Managers;
 public class Card : NetworkBehaviour
 {
     [SerializeField] SpriteRenderer cardFront;
+    [SerializeField] private CardValue cardValue;
+    [SerializeField] private CardColor cardColor;
 
-    private NetworkVariable<int> m_CardID = new NetworkVariable<int>(
+    [SerializeField] private NetworkVariable<int> m_CardID = new NetworkVariable<int>(
         -1,
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server
@@ -30,6 +32,11 @@ public class Card : NetworkBehaviour
         m_CardID.Value = cardID; // Changing this on server triggers the sync
     }
 
+    public void SetSprite(Sprite sprite)
+    {
+        cardFront.sprite = sprite;
+    }
+
     private void OnCardIDChanged(int previousValue, int newValue)
     {
         ApplySprite(newValue);
@@ -41,6 +48,8 @@ public class Card : NetworkBehaviour
         if (cardData != null)
         {
             cardFront.sprite = cardData.cardSprite;
+            cardValue = cardData.cardValue;
+            cardColor = cardData.cardColor;
         }
     }
 

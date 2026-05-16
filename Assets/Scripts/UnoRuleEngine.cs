@@ -19,14 +19,6 @@ public static class UnoRuleEngine
     {
         if (playedCard == null || topCard == null) return false;
 
-        // Custom rule trong spec: không được thắng bằng action/special card.
-        if (playerCardCount == 1 && IsActionCard(playedCard))
-        {
-            return false;
-        }
-
-        if (playedCard == null || topCard == null) return false;
-
         // Luật 4.4: Không được thắng (hết bài) bằng Action Card
         if (playerCardCount == 1 && IsActionCard(playedCard))
         {

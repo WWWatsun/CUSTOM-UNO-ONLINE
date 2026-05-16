@@ -66,7 +66,18 @@ namespace Managers
             discardPile.Add(DrawCard());
             discardPileDisplay.GetComponent<Card>().SetCard(discardPile[0].cardID);
 
-            discardPileDisplay.transform.localScale = Vector3.one * 0.5f;
+            if (discardPile[0].cardColor == CardColor.NEUTRAL)
+            {
+                // If the first card is neutral, we need to shuffle it back to the deck and draw another card
+                activeDeck.AddRange(discardPile);
+                discardPile.Clear();
+                Shuffle();
+                discardPile.Add(DrawCard());
+                discardPileDisplay.GetComponent<Card>().SetCard(discardPile[0].cardID);
+            }
+            GameManager.Instance.SetCurrentColor(discardPile[0].cardColor);
+
+            //discardPileDisplay.transform.localScale = Vector3.one;
         }
 
         private void InitDrawPile()
@@ -76,7 +87,7 @@ namespace Managers
             NetworkObject drawDisplayNetworkObject = drawPileDisplay.GetComponent<NetworkObject>();
             drawDisplayNetworkObject.Spawn();
             drawDisplayNetworkObject.TrySetParent(drawPilePosition);
-            drawPileDisplay.transform.localScale = Vector3.one * 0.5f;
+            //drawPileDisplay.transform.localScale = Vector3.one;
             drawpileNetwordId.Value = drawDisplayNetworkObject.NetworkObjectId;
         }
 
@@ -107,9 +118,14 @@ namespace Managers
             // Shuffle the discard pile if out of card
             if (activeDeck.Count <= 0)
             {
-                activeDeck.Clear();
+                CardScriptables topCard = discardPile[discardPile.Count - 1];
+                discardPile.RemoveAt(discardPile.Count - 1);
+
                 activeDeck.AddRange(discardPile);
+
                 discardPile.Clear();
+                discardPile.Add(topCard);
+
                 Shuffle();
             }
             int pos = activeDeck.Count - 1;
