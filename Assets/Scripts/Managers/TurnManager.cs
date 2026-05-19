@@ -48,19 +48,11 @@ namespace Managers
                     // Get the player's true position
                     Vector3 targetPosition = targetPlayer.transform.position;
 
-                    // OVERRIDE the target's height (Y) to match the arrow's exact height.
-                    // This forces the arrow to only rotate left/right, staying flat on the table!
+                    // Overide the target's height (Y) to match the arrow's exact height.
                     targetPosition.y = turnIndicatorObject.transform.position.y;
 
                     // Look at the flattened position
                     turnIndicatorObject.transform.LookAt(targetPosition);
-
-                    // --- 3D MODEL ALIGNMENT FIX ---
-                    // LookAt makes the local Z-axis (forward) point at the target.
-                    // If your arrow 3D model was modeled sideways, it will point its side at the player.
-                    // If your arrow is sideways right now, uncomment the line below and change 90f 
-                    // to -90f or 180f until the tip of the arrow points at the player:
-                    //
                     turnIndicatorObject.transform.Rotate(0, 90f, 0, Space.Self);
                 }
             }

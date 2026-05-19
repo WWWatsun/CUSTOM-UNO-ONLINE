@@ -24,7 +24,7 @@ namespace Managers
         [Header("Game Settings")]
         public int startingCard { get; private set; } = 7;
 
-        private int currentPenalty = 0;
+        private NetworkVariable<int> currentPenalty = new NetworkVariable<int>(0);
         NetworkVariable<CardColor> currentColor = new NetworkVariable<CardColor>();
 
         [Header("Rule 8")]
@@ -42,6 +42,11 @@ namespace Managers
             }
         }
 
+        private void Update()
+        {
+            
+        }
+
         public override void OnNetworkSpawn()
         {
             if (IsServer)
@@ -49,6 +54,7 @@ namespace Managers
                 SpawnTable();
             }
             currentColor.OnValueChanged += OncurrentColorChanged;
+            currentPenalty.OnValueChanged += OnCurrentPenaltyChanged;
 
             SetCameraColor(currentColor.Value); // Ensure camera starts with the correct color
         }
@@ -77,7 +83,7 @@ namespace Managers
                 topCard: DeckManager.Instance.GetTopDiscardPileCard(),
                 currentColor: currentColor.Value,
                 playerCardCount: PlayersManager.Instance.GetPlayerCardCount(player.GetPlayerIndex()),
-                pendingPenalty: currentPenalty
+                pendingPenalty: currentPenalty.Value
             );
         }
 
@@ -119,7 +125,7 @@ namespace Managers
             {
                 if (card.cardValue == CardValue.PLUS4)
                 {
-                    currentPenalty += 4;
+                    currentPenalty.Value += 4;
                 }
                 UIManager.Instance.ShowColorPickerUIRpc(player.NetworkObjectId);
             }
@@ -141,8 +147,8 @@ namespace Managers
                 return;
             }
 
-            // FIX: Process penalty first, skipping normal draw logic
-            if (currentPenalty > 0)
+            // Process penalty first, skipping normal draw logic
+            if (currentPenalty.Value > 0)
             {
                 AcceptDrawPenalty(player);
                 return;
@@ -197,12 +203,12 @@ namespace Managers
 
                 // --- CẬP NHẬT LUẬT STACKING (4.5) ---
                 case CardValue.PLUS2:
-                    currentPenalty += 2;
+                    currentPenalty.Value += 2;
                     TurnManager.Instance.MoveToNextPlayer(); // FIX: Pass the penalty threat to the next player!
                     break;
 
                 case CardValue.PLUS4:
-                    currentPenalty += 4;
+                    currentPenalty.Value += 4;
                     TurnManager.Instance.MoveToNextPlayer();
                     break;
 
@@ -219,6 +225,7 @@ namespace Managers
 
                 case CardValue.EIGHT:
                     Debug.Log("Rule of 8: Trigger Reaction Event!");
+                    rule8Clickers.Clear();
                     UIManager.Instance.ShowRule8UIRpc(player.NetworkObjectId);
                     StartCoroutine(Rule8ReactionEventRoutine());
                     break;
@@ -299,8 +306,22 @@ namespace Managers
 
         private IEnumerator Rule8ReactionEventRoutine()
         {
+            rule8Clickers.Clear();
+
             float rule8duration = 5f;
-            yield return new WaitForSeconds(rule8duration);
+            float timer = 0f;
+            int totalPlayers = PlayersManager.Instance.GetPlayerCount();
+
+            while (timer < rule8duration)
+            {
+                if (rule8Clickers.Count >= totalPlayers)
+                {
+                    break; // Everyone clicked, stop waiting!
+                }
+                timer += Time.deltaTime;
+                yield return null;
+            }
+
             //Check for non-clicker
             List<int> nonClicker = new List<int>();
             for (int i = 0; i < PlayersManager.Instance.GetPlayerCount(); i++)
@@ -324,6 +345,9 @@ namespace Managers
                 PlayersManager.Instance.DealCardToPlayer(lastToClick, DeckManager.Instance.DrawCard());
                 PlayersManager.Instance.DealCardToPlayer(lastToClick, DeckManager.Instance.DrawCard());
             }
+
+            rule8Clickers.Clear();
+
             UIManager.Instance.TurnOffUIRpc();
             TurnManager.Instance.MoveToNextPlayer();
         }
@@ -354,18 +378,23 @@ namespace Managers
 
         private void AcceptDrawPenalty(Player player)
         {
-            Debug.Log($"Player {player.GetPlayerIndex()} got {currentPenalty} cards and lost turn.");
-            for (int i = 0; i < currentPenalty; i++)
+            Debug.Log($"Player {player.GetPlayerIndex()} got {currentPenalty.Value} cards and lost turn.");
+            for (int i = 0; i < currentPenalty.Value; i++)
             {
                 PlayersManager.Instance.DealCardToPlayer(player.GetPlayerIndex(), DeckManager.Instance.DrawCard());
             }
-            currentPenalty = 0; // Reset penalty
+            currentPenalty.Value = 0; // Reset penalty
             TurnManager.Instance.MoveToNextPlayer();
         }
 
         private void OncurrentColorChanged(CardColor previoudColor, CardColor newColor)
         {
             SetCameraColor(newColor);
+        }
+
+        private void OnCurrentPenaltyChanged(int previousPenalty, int newPenalty)
+        {
+            UIManager.Instance.UpdatePenaltyRpc(newPenalty);
         }
 
         private void SetCameraColor(CardColor color)

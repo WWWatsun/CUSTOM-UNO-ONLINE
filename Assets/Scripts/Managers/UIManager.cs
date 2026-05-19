@@ -10,6 +10,7 @@ public class UIManager : NetworkBehaviour
     [SerializeField] private Button startHostButton;
     [SerializeField] private Button startClientButton;
     [SerializeField] private Button startGameButton;
+    [SerializeField] private TMP_Text penaltyText;
 
     [Header("Panels")]
     [SerializeField] GameObject panelRule0;
@@ -48,6 +49,8 @@ public class UIManager : NetworkBehaviour
             startHostButton.gameObject.SetActive(false);
             startClientButton.gameObject.SetActive(false);
         });
+
+        penaltyText.text = ""; // Clear penalty text at the start
     }
 
     private void Update()
@@ -98,6 +101,19 @@ public class UIManager : NetworkBehaviour
     public void ShowRule8UIRpc(ulong playerNetworkId)
     {
         panelRule8.SetActive(true);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void UpdatePenaltyRpc(int penalty)
+    {
+        if (penalty != 0)
+        {
+            penaltyText.text = $"Current penalty: +{penalty}";
+        }
+        else
+        {
+            penaltyText.text = "";
+        }
     }
 
     [Rpc(SendTo.ClientsAndHost)]

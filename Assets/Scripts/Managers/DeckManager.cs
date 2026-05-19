@@ -13,6 +13,7 @@ namespace Managers
         [SerializeField] CardScriptables[] cardDeck;
         [SerializeField] List<CardScriptables> activeDeck = new List<CardScriptables>();
         [SerializeField] List<CardScriptables> discardPile = new List<CardScriptables>();
+        [SerializeField] private float pileSize = 2f;
 
         [Header("References")]
         [SerializeField] private GameObject cardPrefab;
@@ -62,6 +63,7 @@ namespace Managers
             NetworkObject discardPileDisplayNetworkObject = discardPileDisplay.GetComponent<NetworkObject>();
             discardPileDisplayNetworkObject.Spawn();
             discardPileDisplayNetworkObject.TrySetParent(discardPilePosition);
+            discardPileDisplay.transform.localScale = Vector3.one * pileSize;
 
             discardPile.Add(DrawCard());
             discardPileDisplay.GetComponent<Card>().SetCard(discardPile[0].cardID);
@@ -87,7 +89,7 @@ namespace Managers
             NetworkObject drawDisplayNetworkObject = drawPileDisplay.GetComponent<NetworkObject>();
             drawDisplayNetworkObject.Spawn();
             drawDisplayNetworkObject.TrySetParent(drawPilePosition);
-            //drawPileDisplay.transform.localScale = Vector3.one;
+            drawPileDisplay.transform.localScale = Vector3.one * pileSize;
             drawpileNetwordId.Value = drawDisplayNetworkObject.NetworkObjectId;
         }
 
