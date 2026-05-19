@@ -28,7 +28,7 @@ The networking layer is built using a **Lightweight Client-Server model** via Un
 
 The game strictly enforces the required custom rule set via the `UnoRuleEngine`:
 
-* **Rule of 0 (Directional Swap):** Playing a `0` triggers a UI prompt allowing the player to choose Clockwise or Counter-Clockwise. All players' hands are simultaneously passed in the chosen direction.
+* **Rule of 0 (Directional Swap):** Playing a `0` triggers a UI prompt allowing the player to choose Clockwise or Counter-Clockwise. All players' hands are simultaneously passed in the chosen direction. The turn direction remains unchanged.
 * **Rule 7 (Targeted Swap):** Playing a `7` opens a UI targeting menu. The player selects a specific opponent, and their entire hands are swapped.
 * **Rule 8 (Reaction Event):** Playing an `8` triggers a global quick-time event. All players have a limited window (5 seconds) to click the Reaction button on their screen. The last player to react, or anyone who fails to react in time, is forced to draw 2 penalty cards.
 * **Rule 4.4 (No Win with Action Card):** A player **cannot** win the game if their final card is a Skip, Reverse, +2, Wild, or +4. The `UnoRuleEngine` will flag this as an illegal move and block it. The player must draw a card if they have no other legal moves.
